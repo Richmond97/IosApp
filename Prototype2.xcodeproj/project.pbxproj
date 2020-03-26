@@ -3,18 +3,24 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		893C135023F40E20000C87B3 /* TextToSpeech in Resources */ = {isa = PBXBuildFile; fileRef = 893C134F23F40E20000C87B3 /* TextToSpeech */; };
+		893C135523F420A8000C87B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893C135323F42029000C87B3 /* AudioToolbox.framework */; };
+		89BA091B23E44A2B0018B26C /* mapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA091A23E44A2B0018B26C /* mapsViewController.swift */; };
+		89BA091F23E44FC70018B26C /* YOLOv3Tiny.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */; };
+		89BA092123E456160018B26C /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA092023E456160018B26C /* ObjectDetectionViewController.swift */; };
 		89D694A723E0F5EF003EC695 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694A623E0F5EF003EC695 /* AppDelegate.swift */; };
 		89D694A923E0F5EF003EC695 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694A823E0F5EF003EC695 /* SceneDelegate.swift */; };
-		89D694AB23E0F5EF003EC695 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694AA23E0F5EF003EC695 /* ViewController.swift */; };
 		89D694AE23E0F5EF003EC695 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89D694AC23E0F5EF003EC695 /* Main.storyboard */; };
 		89D694B023E0F5F4003EC695 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89D694AF23E0F5F4003EC695 /* Assets.xcassets */; };
 		89D694B323E0F5F4003EC695 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89D694B123E0F5F4003EC695 /* LaunchScreen.storyboard */; };
 		89D694BE23E0F5F4003EC695 /* Prototype2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694BD23E0F5F4003EC695 /* Prototype2Tests.swift */; };
 		89D694C923E0F5F4003EC695 /* Prototype2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694C823E0F5F4003EC695 /* Prototype2UITests.swift */; };
+		89D694D823E0F643003EC695 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 89D694D723E0F643003EC695 /* PythonKit */; };
+		89F0B11C242C1F8E006C8430 /* DetectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0B11B242C1F8E006C8430 /* DetectionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +41,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		893C134F23F40E20000C87B3 /* TextToSpeech */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextToSpeech; sourceTree = "<group>"; };
+		893C135123F42028000C87B3 /* Prototype2Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Prototype2Debug.entitlements; sourceTree = "<group>"; };
+		893C135323F42029000C87B3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		89BA091A23E44A2B0018B26C /* mapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapsViewController.swift; sourceTree = "<group>"; };
+		89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Tiny.mlmodel; sourceTree = "<group>"; };
+		89BA092023E456160018B26C /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		89D694A323E0F5EF003EC695 /* Prototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89D694A623E0F5EF003EC695 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89D694A823E0F5EF003EC695 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		89D694AA23E0F5EF003EC695 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		89D694AD23E0F5EF003EC695 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		89D694AF23E0F5F4003EC695 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89D694B223E0F5F4003EC695 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +60,7 @@
 		89D694C423E0F5F4003EC695 /* Prototype2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Prototype2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89D694C823E0F5F4003EC695 /* Prototype2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prototype2UITests.swift; sourceTree = "<group>"; };
 		89D694CA23E0F5F4003EC695 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89F0B11B242C1F8E006C8430 /* DetectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89D694D823E0F643003EC695 /* PythonKit in Frameworks */,
+				893C135523F420A8000C87B3 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		893C135223F42029000C87B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				893C135323F42029000C87B3 /* AudioToolbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		89D6949A23E0F5EF003EC695 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +105,7 @@
 				89D694BC23E0F5F4003EC695 /* Prototype2Tests */,
 				89D694C723E0F5F4003EC695 /* Prototype2UITests */,
 				89D694A423E0F5EF003EC695 /* Products */,
+				893C135223F42029000C87B3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,12 +122,17 @@
 		89D694A523E0F5EF003EC695 /* Prototype2 */ = {
 			isa = PBXGroup;
 			children = (
+				893C135123F42028000C87B3 /* Prototype2Debug.entitlements */,
+				89F0B11B242C1F8E006C8430 /* DetectionController.swift */,
 				89D694A623E0F5EF003EC695 /* AppDelegate.swift */,
+				89BA091A23E44A2B0018B26C /* mapsViewController.swift */,
 				89D694A823E0F5EF003EC695 /* SceneDelegate.swift */,
-				89D694AA23E0F5EF003EC695 /* ViewController.swift */,
 				89D694AC23E0F5EF003EC695 /* Main.storyboard */,
+				89BA092023E456160018B26C /* ObjectDetectionViewController.swift */,
 				89D694AF23E0F5F4003EC695 /* Assets.xcassets */,
 				89D694B123E0F5F4003EC695 /* LaunchScreen.storyboard */,
+				89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */,
+				893C134F23F40E20000C87B3 /* TextToSpeech */,
 				89D694B423E0F5F4003EC695 /* Info.plist */,
 			);
 			path = Prototype2;
@@ -144,6 +172,9 @@
 			dependencies = (
 			);
 			name = Prototype2;
+			packageProductDependencies = (
+				89D694D723E0F643003EC695 /* PythonKit */,
+			);
 			productName = Prototype2;
 			productReference = 89D694A323E0F5EF003EC695 /* Prototype2.app */;
 			productType = "com.apple.product-type.application";
@@ -216,6 +247,9 @@
 				Base,
 			);
 			mainGroup = 89D6949A23E0F5EF003EC695;
+			packageReferences = (
+				89D694D623E0F643003EC695 /* XCRemoteSwiftPackageReference "PythonKit" */,
+			);
 			productRefGroup = 89D694A423E0F5EF003EC695 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -232,6 +266,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				893C135023F40E20000C87B3 /* TextToSpeech in Resources */,
 				89D694B323E0F5F4003EC695 /* LaunchScreen.storyboard in Resources */,
 				89D694B023E0F5F4003EC695 /* Assets.xcassets in Resources */,
 				89D694AE23E0F5EF003EC695 /* Main.storyboard in Resources */,
@@ -259,9 +294,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89D694AB23E0F5EF003EC695 /* ViewController.swift in Sources */,
 				89D694A723E0F5EF003EC695 /* AppDelegate.swift in Sources */,
+				89F0B11C242C1F8E006C8430 /* DetectionController.swift in Sources */,
 				89D694A923E0F5EF003EC695 /* SceneDelegate.swift in Sources */,
+				89BA091B23E44A2B0018B26C /* mapsViewController.swift in Sources */,
+				89BA092123E456160018B26C /* ObjectDetectionViewController.swift in Sources */,
+				89BA091F23E44FC70018B26C /* YOLOv3Tiny.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Prototype2/Prototype2Debug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5WXK6TSWTK;
 				INFOPLIST_FILE = Prototype2/Info.plist;
@@ -590,6 +629,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89D694D623E0F643003EC695 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pvieito/PythonKit.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89D694D723E0F643003EC695 /* PythonKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89D694D623E0F643003EC695 /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 89D6949B23E0F5EF003EC695 /* Project object */;
 }
