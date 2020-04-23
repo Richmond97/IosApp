@@ -11,10 +11,11 @@ import AVKit
 import Vision
 import VisionKit
 import AVFoundation
-
+import TensorFlowLite
 
 
 class ObjectDetectionViewController: DetectionController {
+    
     private var detectionOverlay: CALayer! = nil
     
     // Vision parts
@@ -23,20 +24,18 @@ class ObjectDetectionViewController: DetectionController {
         return true
         
     }
-
-    @IBOutlet var belowView: UIView!
     @IBOutlet weak var objectLable: UILabel!
     @IBOutlet weak var accuracyLabel: UILabel!
     
     
-    
+    @discardableResult
     func modelSetup() -> NSError?
     {
          let error: NSError! = nil
          guard let modelURL = Bundle.main.url(forResource: "YOLOv3Tiny", withExtension: "mlmodelc")
             else
                 {
-                   return NSError(domain: "VisionObjectRecognitionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
+                   return NSError(domain: "ObjectDetectiontionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
                 }
         do {
             let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
@@ -61,6 +60,7 @@ class ObjectDetectionViewController: DetectionController {
                   
                   return error
     }
+    
     func objectRequestResults(_ results: [Any]) {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
@@ -84,6 +84,7 @@ class ObjectDetectionViewController: DetectionController {
         self.updateLayerGeometry()
         CATransaction.commit()
     }
+    
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
@@ -103,9 +104,11 @@ class ObjectDetectionViewController: DetectionController {
         super.setupAVCapture()
         
         // setup Vision parts
-        modelSetup()
-        updateLayerGeometry()
+
         layersSetup()
+        updateLayerGeometry()
+        modelSetup()
+
         // start the capture
         startCaptureSession()
     }
@@ -136,7 +139,7 @@ class ObjectDetectionViewController: DetectionController {
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
         // rotate the layer into screen orientation and scale and mirror
-        detectionOverlay.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: scale, y: -scale))
+       detectionOverlay.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: scale, y: -scale))
         // center the layer
         detectionOverlay.position = CGPoint (x: bounds.midX, y: bounds.midY)
         
@@ -172,8 +175,6 @@ class ObjectDetectionViewController: DetectionController {
         return shapeLayer
     }
 
-       
-                  
-          
 }
+
 

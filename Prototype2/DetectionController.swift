@@ -7,9 +7,9 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
     
-    @IBOutlet weak private var previewView: UIView!
+    @IBOutlet weak private var belowView: UIView!
     private let session = AVCaptureSession()
-    private var previewLayer: AVCaptureVideoPreviewLayer! = nil
+    private var belowLayer: AVCaptureVideoPreviewLayer! = nil
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
     private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
@@ -21,6 +21,14 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
+        
+       // let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
+                               //           leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
+                               //           self.view.addGestureRecognizer(leftSwipe)
+                     
+     //   let rigtSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
+                        //                 rigtSwipe.direction = UISwipeGestureRecognizer.Direction.right
+              //                           self.view.addGestureRecognizer(rigtSwipe)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,11 +82,11 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
             print(error)
         }
         session.commitConfiguration()
-        previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        rootLayer = previewView.layer
-        previewLayer.frame = rootLayer.bounds
-        rootLayer.addSublayer(previewLayer)
+        belowLayer = AVCaptureVideoPreviewLayer(session: session)
+        belowLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        rootLayer = belowView.layer
+        belowLayer.frame = rootLayer.bounds
+        rootLayer.addSublayer(belowLayer)
     }
     
     func startCaptureSession() {
@@ -87,8 +95,8 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     
     // Clean up capture setup
     func teardownAVCapture() {
-        previewLayer.removeFromSuperlayer()
-        previewLayer = nil
+        belowLayer.removeFromSuperlayer()
+        belowLayer = nil
     }
     
     func captureOutput(_ captureOutput: AVCaptureOutput, didDrop didDropSampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -114,4 +122,18 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
         return exifOrientation
     }
 }
+extension UIViewController
+    {
+    @objc func myswipeAction(swipe:UISwipeGestureRecognizer)
+        {
+            switch swipe.direction.rawValue
+            {   case 1:
+                    performSegue(withIdentifier: "swipeRight", sender: self)
+                case 2:
+                    performSegue(withIdentifier: "swipeLeft", sender: self)
+                default:
+                    break
+            }
+        }
+    }
 
