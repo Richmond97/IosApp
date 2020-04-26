@@ -113,15 +113,28 @@ class MapsOps: NSObject {
                     var directionsURLString = URLDirections + "origin=" + originLocation + "&destination=" + destinationLocation + "&key=" + key
                     directionsURLString = directionsURLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
                     let directionsURL = NSURL(string: directionsURLString)
-                    
-                    DispatchQueue.global(qos: .background).async {
-                    do{
+                   /*
+                    Alamofire.request(directionsURLString).responseJSON
+                        { response in
 
-                    }
-                    catch {
-                        print("JSONSerialization error:", error)
-                        
+                            if let JSON = response.result.value {
+
+                                let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+
+                                let routesArray = (mapResponse["routes"] as? Array) ?? []
+
+                                let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
+
+                                let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
+                                let polypoints = (overviewPolyline["points"] as? String) ?? ""
+                                let line  = polypoints
+
+                               // self.addPolyLine(encodedString: line)
                         }
+                    }*/
+                    
+                   DispatchQueue.global(qos: .background).async {
+                        
                     DispatchQueue.main.async {
                         
                         let directionsData = NSData(contentsOf: directionsURL! as URL)

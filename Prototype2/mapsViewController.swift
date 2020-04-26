@@ -6,7 +6,7 @@
 //  Copyright © 2020 Richmond Yeboah. All rights reserved.
 //
 
-import UIKit
+/*import UIKit
 import GoogleMaps
 import Direction
 import CoreLocation
@@ -27,20 +27,43 @@ class mapsViewController: UIViewController,CLLocationManagerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: 48.857165, longitude: 2.354613, zoom: 8.0)
+       //mapView.camera = camera
+
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        mapView.addObserver(self,forKeyPath: ("myLocation"),options: NSKeyValueObservingOptions.new, context: nil)
-        func observeValue( forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-            if didFindMyLocation {
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        
+
+
+       // let myLocation: CLLocation = change?[NSKeyValueChangeKey.newKey] as! CLLocation
+      //  self.mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 14.0)
+        self.mapView.addObserver(self,forKeyPath: ("myLocation"),options: NSKeyValueObservingOptions.new, context:  nil)
+         }
+    
+    override func didReceiveMemoryWarning()
+     {
+         super.didReceiveMemoryWarning()
+     }
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+       if status == CLAuthorizationStatus.authorizedWhenInUse || status == .authorizedAlways {
+        mapView.isMyLocationEnabled = true
+        locationManager.stopUpdatingLocation()
+       // mapView.userTrackingMode = .followWithHeading
+        
+       }
+    }
+    override func observeValue( forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+            if  didFindMyLocation {
                 let myLocation: CLLocation = change?[NSKeyValueChangeKey.newKey] as! CLLocation
-                mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 15.0)
-                mapView.settings.myLocationButton = true
-                didFindMyLocation = true
+                self.mapView.camera = GMSCameraPosition.camera(withTarget: myLocation.coordinate, zoom: 14.0)
+                self.mapView.isMyLocationEnabled = true
+                self.mapView.settings.myLocationButton = true
+                self.didFindMyLocation = true
+                print("my location is ", myLocation.coordinate)
             }
     }
     
-
-    }
     @IBAction func searchAction(_ sender: Any) {
       /*  let addressAlert = UIAlertController(title: "Address Finder", message: "Type the address you want to find:", preferredStyle: UIAlertController.Style.alert)
                 
@@ -85,12 +108,7 @@ class mapsViewController: UIViewController,CLLocationManagerDelegate{
            present(alertController, animated: true, completion: nil)
                 
     }
-    //Setting start location as user current location
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.authorizedWhenInUse {
-            mapView.isMyLocationEnabled = true
-        }
-    }
+
     func setuplocationPointer(coordinate: CLLocationCoordinate2D) {
         var locationPointer: GMSMarker!
         locationPointer = GMSMarker(position: coordinate)
@@ -121,6 +139,7 @@ class mapsViewController: UIViewController,CLLocationManagerDelegate{
                     self.setMapforRoute()
                     self.showRoute()
                     self.showRouteInfo()
+                    print(status)
                 }
                 else {
                     print(status)
@@ -150,14 +169,37 @@ class mapsViewController: UIViewController,CLLocationManagerDelegate{
     }
     func showRoute(){
         let route = mapOps.overviewPolyline["points"] as! String
+        
         let path: GMSPath = GMSPath(fromEncodedPath: route)!
+        routePolyline = GMSPolyline(path: path)
         routePolyline.map = mapView!
     }
     func showRouteInfo(){
         lblInfo.text = mapOps.totDistance  + "\n" + mapOps.totDuration
     }
-    
-    
 }
     
-    
+/*extension mapsViewController: CLLocationManagerDelegate
+{
+     //Setting start location as user current location
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.authorizedWhenInUse || status == .authorizedAlways {
+             mapView.isMyLocationEnabled = true
+             locationManager.stopUpdatingLocation()
+         }
+        else{
+            mapView.isMyLocationEnabled = true
+            locationManager.stopUpdatingLocation()
+        }
+     }
+     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
+     {
+         if locations.count > 0
+         {
+             mapView.camera = GMSCameraPosition.camera(withTarget: (locations.last?.coordinate)!, zoom: 0.2)
+             mapView.settings.myLocationButton = true
+         }
+     }
+}*/
+*/

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6A3E84F6A53D12BBE3AF9B0D /* Pods_Prototype2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC1605150C8115D8E3DE36D /* Pods_Prototype2.framework */; };
+		188B802C27E795007FCA0DF2 /* Pods_Prototype2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1368837E526C376BD2A4580 /* Pods_Prototype2.framework */; };
+		57066F0BF5596FE0CC4324ED /* Pods_Prototype2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054C01077B86B70B74C36183 /* Pods_Prototype2Tests.framework */; };
 		891CFC0224507CFD0060A335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 891CFC0124507CFD0060A335 /* MapKit.framework */; };
 		891CFC042450B6EE0060A335 /* MapsOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CFC032450B6EE0060A335 /* MapsOps.swift */; };
+		8929AAEA24551170005A22E6 /* MVVControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAE924551170005A22E6 /* MVVControllerViewController.swift */; };
 		893C135023F40E20000C87B3 /* TextToSpeech in Resources */ = {isa = PBXBuildFile; fileRef = 893C134F23F40E20000C87B3 /* TextToSpeech */; };
 		893C135523F420A8000C87B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893C135323F42029000C87B3 /* AudioToolbox.framework */; };
 		89730134244A290A009762A3 /* gestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89730133244A290A009762A3 /* gestureController.swift */; };
@@ -37,8 +39,7 @@
 		89D694BE23E0F5F4003EC695 /* Prototype2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694BD23E0F5F4003EC695 /* Prototype2Tests.swift */; };
 		89D694C923E0F5F4003EC695 /* Prototype2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694C823E0F5F4003EC695 /* Prototype2UITests.swift */; };
 		89F0B11C242C1F8E006C8430 /* DetectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0B11B242C1F8E006C8430 /* DetectionController.swift */; };
-		B7C371F0AE8C10EF9809F870 /* Pods_Prototype2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FA55065C0B723D7CFD4858 /* Pods_Prototype2Tests.framework */; };
-		E0A205118337E333F15577BD /* Pods_Prototype2_Prototype2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6CB396747978BFC6D5EB9F /* Pods_Prototype2_Prototype2UITests.framework */; };
+		B22217F873BDA28BE44627D2 /* Pods_Prototype2_Prototype2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECCC5CD257C503E32809FFB6 /* Pods_Prototype2_Prototype2UITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,15 +60,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0CC1605150C8115D8E3DE36D /* Pods_Prototype2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Prototype2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		054C01077B86B70B74C36183 /* Pods_Prototype2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Prototype2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17FD2E304B352ED9C933D247 /* Pods-Prototype2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2.debug.xcconfig"; path = "Target Support Files/Pods-Prototype2/Pods-Prototype2.debug.xcconfig"; sourceTree = "<group>"; };
 		31DFBBFEE7F9EDB2AFED6315 /* Pods-Prototype2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2Tests.release.xcconfig"; path = "Target Support Files/Pods-Prototype2Tests/Pods-Prototype2Tests.release.xcconfig"; sourceTree = "<group>"; };
-		3F6CB396747978BFC6D5EB9F /* Pods_Prototype2_Prototype2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Prototype2_Prototype2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		57FA55065C0B723D7CFD4858 /* Pods_Prototype2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Prototype2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78AC34D484D6670BC286C555 /* Pods-Prototype2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2.release.xcconfig"; path = "Target Support Files/Pods-Prototype2/Pods-Prototype2.release.xcconfig"; sourceTree = "<group>"; };
 		7C11E4DEC338282FEBC99A26 /* Pods-Prototype2-Prototype2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2-Prototype2UITests.release.xcconfig"; path = "Target Support Files/Pods-Prototype2-Prototype2UITests/Pods-Prototype2-Prototype2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		891CFC0124507CFD0060A335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		891CFC032450B6EE0060A335 /* MapsOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsOps.swift; sourceTree = "<group>"; };
+		8929AAE924551170005A22E6 /* MVVControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVControllerViewController.swift; sourceTree = "<group>"; };
 		893C134F23F40E20000C87B3 /* TextToSpeech */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextToSpeech; sourceTree = "<group>"; };
 		893C135123F42028000C87B3 /* Prototype2Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Prototype2Debug.entitlements; sourceTree = "<group>"; };
 		893C135323F42029000C87B3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -105,6 +105,8 @@
 		89F0B11B242C1F8E006C8430 /* DetectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionController.swift; sourceTree = "<group>"; };
 		98CB23F3BC933D8FC0E48C67 /* Pods-Prototype2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2Tests.debug.xcconfig"; path = "Target Support Files/Pods-Prototype2Tests/Pods-Prototype2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		ACF036575201DF690EA11B3E /* Pods-Prototype2-Prototype2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2-Prototype2UITests.debug.xcconfig"; path = "Target Support Files/Pods-Prototype2-Prototype2UITests/Pods-Prototype2-Prototype2UITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E1368837E526C376BD2A4580 /* Pods_Prototype2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Prototype2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECCC5CD257C503E32809FFB6 /* Pods_Prototype2_Prototype2UITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Prototype2_Prototype2UITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +128,7 @@
 				89730138244D0B1D009762A3 /* CoreLocation.framework in Frameworks */,
 				89730136244D0B03009762A3 /* AVFoundation.framework in Frameworks */,
 				893C135523F420A8000C87B3 /* AudioToolbox.framework in Frameworks */,
-				6A3E84F6A53D12BBE3AF9B0D /* Pods_Prototype2.framework in Frameworks */,
+				188B802C27E795007FCA0DF2 /* Pods_Prototype2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7C371F0AE8C10EF9809F870 /* Pods_Prototype2Tests.framework in Frameworks */,
+				57066F0BF5596FE0CC4324ED /* Pods_Prototype2Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0A205118337E333F15577BD /* Pods_Prototype2_Prototype2UITests.framework in Frameworks */,
+				B22217F873BDA28BE44627D2 /* Pods_Prototype2_Prototype2UITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,9 +168,9 @@
 				89730137244D0B1D009762A3 /* CoreLocation.framework */,
 				89730135244D0B03009762A3 /* AVFoundation.framework */,
 				893C135323F42029000C87B3 /* AudioToolbox.framework */,
-				0CC1605150C8115D8E3DE36D /* Pods_Prototype2.framework */,
-				3F6CB396747978BFC6D5EB9F /* Pods_Prototype2_Prototype2UITests.framework */,
-				57FA55065C0B723D7CFD4858 /* Pods_Prototype2Tests.framework */,
+				E1368837E526C376BD2A4580 /* Pods_Prototype2.framework */,
+				ECCC5CD257C503E32809FFB6 /* Pods_Prototype2_Prototype2UITests.framework */,
+				054C01077B86B70B74C36183 /* Pods_Prototype2Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -208,6 +210,7 @@
 				89730133244A290A009762A3 /* gestureController.swift */,
 				89D694A823E0F5EF003EC695 /* SceneDelegate.swift */,
 				89D694AC23E0F5EF003EC695 /* Main.storyboard */,
+				8929AAE924551170005A22E6 /* MVVControllerViewController.swift */,
 				89BA092023E456160018B26C /* ObjectDetectionViewController.swift */,
 				89D694AF23E0F5F4003EC695 /* Assets.xcassets */,
 				89D694B123E0F5F4003EC695 /* LaunchScreen.storyboard */,
@@ -492,6 +495,7 @@
 			files = (
 				8973014F244D11B4009762A3 /* bridge.m in Sources */,
 				891CFC042450B6EE0060A335 /* MapsOps.swift in Sources */,
+				8929AAEA24551170005A22E6 /* MVVControllerViewController.swift in Sources */,
 				89730134244A290A009762A3 /* gestureController.swift in Sources */,
 				89D694A723E0F5EF003EC695 /* AppDelegate.swift in Sources */,
 				89F0B11C242C1F8E006C8430 /* DetectionController.swift in Sources */,

@@ -5,12 +5,17 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'Prototype2' do
 
-    use_frameworks!
-    
+
+   use_frameworks!
+  #  use_modular_headers!
+
 pod 'TensorFlowLiteSwift'
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'Direction'
+# pod 'Alamofire'
+# pod 'MapboxNavigation'
+
 
   # Pods for Prototype2
 
