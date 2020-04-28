@@ -1,4 +1,4 @@
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Direction" "${PODS_CONFIGURATION_BUILD_DIR}/TensorFlowLiteSwift" "${PODS_ROOT}/GoogleMaps/Base/Frameworks" "${PODS_ROOT}/GoogleMaps/Maps/Frameworks" "${PODS_ROOT}/TensorFlowLiteC/Frameworks"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Direction" "${PODS_CONFIGURATION_BUILD_DIR}/TensorFlowLiteSwift" "${PODS_ROOT}/GoogleMaps/Base/Frameworks" "${PODS_ROOT}/GoogleMaps/Maps/Frameworks"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Direction/Direction.framework/Headers" "${PODS_CONFIGURATION_BUILD_DIR}/TensorFlowLiteSwift/TensorFlowLite.framework/Headers"
 OTHER_LDFLAGS = $(inherited) -l"c++" -l"z" -framework "Accelerate" -framework "CoreData" -framework "CoreGraphics" -framework "CoreImage" -framework "CoreLocation" -framework "CoreTelephony" -framework "CoreText" -framework "Foundation" -framework "GLKit" -framework "ImageIO" -framework "OpenGLES" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit"

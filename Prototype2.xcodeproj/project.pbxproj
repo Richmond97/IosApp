@@ -11,7 +11,8 @@
 		57066F0BF5596FE0CC4324ED /* Pods_Prototype2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054C01077B86B70B74C36183 /* Pods_Prototype2Tests.framework */; };
 		891CFC0224507CFD0060A335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 891CFC0124507CFD0060A335 /* MapKit.framework */; };
 		891CFC042450B6EE0060A335 /* MapsOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CFC032450B6EE0060A335 /* MapsOps.swift */; };
-		8929AAEA24551170005A22E6 /* MVVControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAE924551170005A22E6 /* MVVControllerViewController.swift */; };
+		8929AAEA24551170005A22E6 /* MVVControllerViewCon troller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAE924551170005A22E6 /* MVVControllerViewCon troller.swift */; };
+		8929AAEC2457130B005A22E6 /* SpeechSynthetizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */; };
 		893C135023F40E20000C87B3 /* TextToSpeech in Resources */ = {isa = PBXBuildFile; fileRef = 893C134F23F40E20000C87B3 /* TextToSpeech */; };
 		893C135523F420A8000C87B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893C135323F42029000C87B3 /* AudioToolbox.framework */; };
 		89730134244A290A009762A3 /* gestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89730133244A290A009762A3 /* gestureController.swift */; };
@@ -67,7 +68,8 @@
 		7C11E4DEC338282FEBC99A26 /* Pods-Prototype2-Prototype2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2-Prototype2UITests.release.xcconfig"; path = "Target Support Files/Pods-Prototype2-Prototype2UITests/Pods-Prototype2-Prototype2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		891CFC0124507CFD0060A335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		891CFC032450B6EE0060A335 /* MapsOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsOps.swift; sourceTree = "<group>"; };
-		8929AAE924551170005A22E6 /* MVVControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVControllerViewController.swift; sourceTree = "<group>"; };
+		8929AAE924551170005A22E6 /* MVVControllerViewCon troller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MVVControllerViewCon troller.swift"; sourceTree = "<group>"; };
+		8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthetizer.swift; sourceTree = "<group>"; };
 		893C134F23F40E20000C87B3 /* TextToSpeech */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextToSpeech; sourceTree = "<group>"; };
 		893C135123F42028000C87B3 /* Prototype2Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Prototype2Debug.entitlements; sourceTree = "<group>"; };
 		893C135323F42029000C87B3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -210,7 +212,8 @@
 				89730133244A290A009762A3 /* gestureController.swift */,
 				89D694A823E0F5EF003EC695 /* SceneDelegate.swift */,
 				89D694AC23E0F5EF003EC695 /* Main.storyboard */,
-				8929AAE924551170005A22E6 /* MVVControllerViewController.swift */,
+				8929AAE924551170005A22E6 /* MVVControllerViewCon troller.swift */,
+				8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */,
 				89BA092023E456160018B26C /* ObjectDetectionViewController.swift */,
 				89D694AF23E0F5F4003EC695 /* Assets.xcassets */,
 				89D694B123E0F5F4003EC695 /* LaunchScreen.storyboard */,
@@ -495,8 +498,9 @@
 			files = (
 				8973014F244D11B4009762A3 /* bridge.m in Sources */,
 				891CFC042450B6EE0060A335 /* MapsOps.swift in Sources */,
-				8929AAEA24551170005A22E6 /* MVVControllerViewController.swift in Sources */,
+				8929AAEA24551170005A22E6 /* MVVControllerViewCon troller.swift in Sources */,
 				89730134244A290A009762A3 /* gestureController.swift in Sources */,
+				8929AAEC2457130B005A22E6 /* SpeechSynthetizer.swift in Sources */,
 				89D694A723E0F5EF003EC695 /* AppDelegate.swift in Sources */,
 				89F0B11C242C1F8E006C8430 /* DetectionController.swift in Sources */,
 				89D694A923E0F5EF003EC695 /* SceneDelegate.swift in Sources */,

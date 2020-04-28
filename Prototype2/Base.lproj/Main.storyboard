@@ -28,25 +28,38 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="o6d-4e-YXc">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="o6d-4e-YXc">
                                 <rect key="frame" x="0.0" y="185" width="414" height="711"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="sBQ-05-TpT" id="nwF-T3-T8J"/>
+                                    <outletCollection property="gestureRecognizers" destination="FqT-Cf-pm2" appends="YES" id="qM8-oe-RyH"/>
                                 </connections>
                             </mapView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" text="" translatesAutoresizingMaskIntoConstraints="NO" id="8pH-FL-pqO">
-                                <rect key="frame" x="0.0" y="141" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="8pH-FL-pqO">
+                                <rect key="frame" x="0.0" y="129" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="yes" enablesReturnKeyAutomatically="YES" textContentType="location"/>
                                 <connections>
                                     <outlet property="delegate" destination="sBQ-05-TpT" id="YPF-kF-Eub"/>
                                 </connections>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Xve-iO-SSS">
+                                <rect key="frame" x="189" y="503" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="8pH-FL-pqO" firstAttribute="trailing" secondItem="X71-ZK-Hfb" secondAttribute="trailing" id="1sw-bM-MMq"/>
+                            <constraint firstItem="t3B-3x-eX0" firstAttribute="trailing" secondItem="Xve-iO-SSS" secondAttribute="trailing" constant="211" id="5er-qh-Jwp"/>
+                            <constraint firstItem="o6d-4e-YXc" firstAttribute="top" secondItem="8pH-FL-pqO" secondAttribute="bottom" id="Gwv-O5-kfR"/>
+                            <constraint firstItem="t3B-3x-eX0" firstAttribute="bottom" secondItem="Xve-iO-SSS" secondAttribute="bottom" constant="370" id="Hce-b6-Vwo"/>
+                            <constraint firstItem="Xve-iO-SSS" firstAttribute="leading" secondItem="t3B-3x-eX0" secondAttribute="leading" constant="166" id="ITA-R8-1IX"/>
+                            <constraint firstItem="Xve-iO-SSS" firstAttribute="top" secondItem="8pH-FL-pqO" secondAttribute="bottom" constant="270" id="N3E-zM-FKL"/>
+                            <constraint firstItem="8pH-FL-pqO" firstAttribute="leading" secondItem="o6d-4e-YXc" secondAttribute="leading" id="PNp-Jv-Z7Q"/>
                             <constraint firstItem="t3B-3x-eX0" firstAttribute="bottom" secondItem="X71-ZK-Hfb" secondAttribute="bottom" constant="690" id="TMH-fI-Qm9"/>
+                            <constraint firstItem="8pH-FL-pqO" firstAttribute="trailing" secondItem="o6d-4e-YXc" secondAttribute="trailing" id="YuU-bb-ysb"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="o6d-4e-YXc" secondAttribute="bottom" constant="-34" id="nuS-st-igp"/>
+                            <constraint firstItem="8pH-FL-pqO" firstAttribute="leading" secondItem="X71-ZK-Hfb" secondAttribute="leading" id="nzH-ud-VZj"/>
                             <constraint firstItem="X71-ZK-Hfb" firstAttribute="top" secondItem="t3B-3x-eX0" secondAttribute="top" id="pUh-hs-DDg"/>
                             <constraint firstItem="X71-ZK-Hfb" firstAttribute="leading" secondItem="t3B-3x-eX0" secondAttribute="leading" id="tQi-5d-GKY"/>
                             <constraint firstItem="X71-ZK-Hfb" firstAttribute="trailing" secondItem="t3B-3x-eX0" secondAttribute="trailing" id="uU5-rQ-2SA"/>
@@ -57,9 +70,16 @@
                         <outlet property="lblDirection" destination="Tpd-eE-AMc" id="U6a-bW-8aN"/>
                         <outlet property="mapView" destination="o6d-4e-YXc" id="gLe-DX-fV5"/>
                         <outlet property="searchBar" destination="8pH-FL-pqO" id="qIk-gJ-TOL"/>
+                        <outlet property="tapGesture" destination="FqT-Cf-pm2" id="jJF-sg-m49"/>
+                        <outlet property="voiceActivityIndicator" destination="Xve-iO-SSS" id="ZKw-bG-DGX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tgx-wy-Ppz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="FqT-Cf-pm2">
+                    <connections>
+                        <action selector="tapGestureAction:" destination="sBQ-05-TpT" id="CXN-Ub-zPu"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-169862.31884057971" y="-3201.5625"/>
         </scene>
