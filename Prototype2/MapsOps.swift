@@ -53,7 +53,7 @@ class MapsOps: NSObject {
         if let lookupAddress = address {
             var error : NSError?
             //let allowed = NSMutableCharacterSet.alphanumeric()
-            var geocodeURLString = URLGeocode + "address=" + lookupAddress + "&key=" + key
+            var geocodeURLString = URLGeocode + "adßdress=" + lookupAddress + "&key=" + key
             print( "geocode url is = "+geocodeURLString)
             
             //ecode url

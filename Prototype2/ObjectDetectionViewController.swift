@@ -14,9 +14,11 @@ import AVFoundation
 import TensorFlowLite
 
 
+
 class ObjectDetectionViewController: DetectionController {
     
     private var detectionOverlay: CALayer! = nil
+    var mvv = MVVControllerViewController()
     
     // Vision parts
     private var requests = [VNRequest]()
@@ -26,7 +28,8 @@ class ObjectDetectionViewController: DetectionController {
     }
     @IBOutlet weak var objectLable: UILabel!
     @IBOutlet weak var accuracyLabel: UILabel!
-    
+    var object = "nil"
+    var topLabelObservation: AnyObject!
     
     @discardableResult
     func modelSetup() -> NSError?
@@ -70,7 +73,7 @@ class ObjectDetectionViewController: DetectionController {
                 continue
             }
             // Select only the label with the highest confidence.
-            let topLabelObservation = objectObservation.labels[0]
+            topLabelObservation = objectObservation.labels[0]
             let objectBounds = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(bufferSize.width), Int(bufferSize.height))
             
             let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
@@ -80,6 +83,11 @@ class ObjectDetectionViewController: DetectionController {
                                                             confidence: topLabelObservation.confidence)
             shapeLayer.addSublayer(textLayer)
             detectionOverlay.addSublayer(shapeLayer)
+            object = getObject()
+            print(object)
+            mvv.object = object
+          //  var o = segue.destination as! MVVControllerViewController
+         //   o.object = self.object
         }
         self.updateLayerGeometry()
         CATransaction.commit()
@@ -174,7 +182,25 @@ class ObjectDetectionViewController: DetectionController {
         shapeLayer.cornerRadius = 7
         return shapeLayer
     }
+    
+    func getObject() -> String{
+        if topLabelObservation.confidence > 0.60 {
+           object = topLabelObservation.identifier as String
 
+        }
+        return object
+    }
+ /*   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var o = segue.destination as! MVVControllerViewController
+        o.object = self.object
+    }*/
+ /*   @IBAction func start(_ sender: Any) {
+        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "startMap"{
+                _ = segue.destination as! MVVControllerViewController
+            }
+        }
+    }*/
 }
 
 

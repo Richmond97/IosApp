@@ -22,6 +22,7 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
         super.viewDidLoad()
         setupAVCapture()
         
+
        // let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
                                //           leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
                                //           self.view.addGestureRecognizer(leftSwipe)

@@ -13,20 +13,20 @@
 		891CFC042450B6EE0060A335 /* MapsOps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891CFC032450B6EE0060A335 /* MapsOps.swift */; };
 		8929AAEA24551170005A22E6 /* MVVControllerViewCon troller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAE924551170005A22E6 /* MVVControllerViewCon troller.swift */; };
 		8929AAEC2457130B005A22E6 /* SpeechSynthetizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */; };
-		893C135023F40E20000C87B3 /* TextToSpeech in Resources */ = {isa = PBXBuildFile; fileRef = 893C134F23F40E20000C87B3 /* TextToSpeech */; };
+		89384298245B927200A8FA25 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973014B244D0F2D009762A3 /* CoreData.framework */; };
+		89384299245B949800A8FA25 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730149244D0F14009762A3 /* libicucore.A.dylib */; };
+		8938429A245B94AC00A8FA25 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730147244D0E9C009762A3 /* OpenGLES.framework */; };
+		8938429B245B94C000A8FA25 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730145244D0E90009762A3 /* QuartzCore.framework */; };
+		8938429C245B954000A8FA25 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730141244D0E71009762A3 /* libz.1.dylib */; };
+		8938429D245B958300A8FA25 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973013D244D0B4A009762A3 /* ImageIO.framework */; };
+		8938429E245B95C600A8FA25 /* TextToSpeech in Resources */ = {isa = PBXBuildFile; fileRef = 893C134F23F40E20000C87B3 /* TextToSpeech */; };
 		893C135523F420A8000C87B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 893C135323F42029000C87B3 /* AudioToolbox.framework */; };
 		89730134244A290A009762A3 /* gestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89730133244A290A009762A3 /* gestureController.swift */; };
 		89730136244D0B03009762A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730135244D0B03009762A3 /* AVFoundation.framework */; };
 		89730138244D0B1D009762A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730137244D0B1D009762A3 /* CoreLocation.framework */; };
 		8973013A244D0B29009762A3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730139244D0B29009762A3 /* CoreText.framework */; };
 		8973013C244D0B3D009762A3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973013B244D0B3D009762A3 /* GLKit.framework */; };
-		8973013E244D0B4A009762A3 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973013D244D0B4A009762A3 /* ImageIO.framework */; };
-		89730142244D0E71009762A3 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730141244D0E71009762A3 /* libz.1.dylib */; };
 		89730144244D0E83009762A3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730143244D0E83009762A3 /* SystemConfiguration.framework */; };
-		89730146244D0E90009762A3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730145244D0E90009762A3 /* QuartzCore.framework */; };
-		89730148244D0E9C009762A3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730147244D0E9C009762A3 /* OpenGLES.framework */; };
-		8973014A244D0F14009762A3 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730149244D0F14009762A3 /* libicucore.A.dylib */; };
-		8973014C244D0F2D009762A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973014B244D0F2D009762A3 /* CoreData.framework */; };
 		8973014F244D11B4009762A3 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8973014E244D11B4009762A3 /* bridge.m */; };
 		89730150244D3EA1009762A3 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973013F244D0E09009762A3 /* libc++.1.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		89BA091B23E44A2B0018B26C /* mapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA091A23E44A2B0018B26C /* mapsViewController.swift */; };
@@ -68,7 +68,7 @@
 		7C11E4DEC338282FEBC99A26 /* Pods-Prototype2-Prototype2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2-Prototype2UITests.release.xcconfig"; path = "Target Support Files/Pods-Prototype2-Prototype2UITests/Pods-Prototype2-Prototype2UITests.release.xcconfig"; sourceTree = "<group>"; };
 		891CFC0124507CFD0060A335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		891CFC032450B6EE0060A335 /* MapsOps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsOps.swift; sourceTree = "<group>"; };
-		8929AAE924551170005A22E6 /* MVVControllerViewCon troller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MVVControllerViewCon troller.swift"; sourceTree = "<group>"; };
+		8929AAE924551170005A22E6 /* MVVControllerViewCon troller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "MVVControllerViewCon troller.swift"; path = "Prototype2/MVVControllerViewCon troller.swift"; sourceTree = SOURCE_ROOT; };
 		8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthetizer.swift; sourceTree = "<group>"; };
 		893C134F23F40E20000C87B3 /* TextToSpeech */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextToSpeech; sourceTree = "<group>"; };
 		893C135123F42028000C87B3 /* Prototype2Debug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Prototype2Debug.entitlements; sourceTree = "<group>"; };
@@ -116,15 +116,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8938429D245B958300A8FA25 /* ImageIO.framework in Frameworks */,
+				8938429C245B954000A8FA25 /* libz.1.dylib in Frameworks */,
+				8938429B245B94C000A8FA25 /* QuartzCore.framework in Frameworks */,
+				8938429A245B94AC00A8FA25 /* OpenGLES.framework in Frameworks */,
+				89384299245B949800A8FA25 /* libicucore.A.dylib in Frameworks */,
+				89384298245B927200A8FA25 /* CoreData.framework in Frameworks */,
 				89730150244D3EA1009762A3 /* libc++.1.dylib in Frameworks */,
-				8973013E244D0B4A009762A3 /* ImageIO.framework in Frameworks */,
-				8973014C244D0F2D009762A3 /* CoreData.framework in Frameworks */,
-				8973014A244D0F14009762A3 /* libicucore.A.dylib in Frameworks */,
-				89730148244D0E9C009762A3 /* OpenGLES.framework in Frameworks */,
-				89730146244D0E90009762A3 /* QuartzCore.framework in Frameworks */,
 				89730144244D0E83009762A3 /* SystemConfiguration.framework in Frameworks */,
 				891CFC0224507CFD0060A335 /* MapKit.framework in Frameworks */,
-				89730142244D0E71009762A3 /* libz.1.dylib in Frameworks */,
 				8973013C244D0B3D009762A3 /* GLKit.framework in Frameworks */,
 				8973013A244D0B29009762A3 /* CoreText.framework in Frameworks */,
 				89730138244D0B1D009762A3 /* CoreLocation.framework in Frameworks */,
@@ -181,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				89D694A523E0F5EF003EC695 /* Prototype2 */,
-				89D694BC23E0F5F4003EC695 /* Prototype2Tests */,
 				89D694C723E0F5F4003EC695 /* Prototype2UITests */,
 				89D694A423E0F5EF003EC695 /* Products */,
 				893C135223F42029000C87B3 /* Frameworks */,
@@ -220,6 +219,7 @@
 				89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */,
 				893C134F23F40E20000C87B3 /* TextToSpeech */,
 				89D694B423E0F5F4003EC695 /* Info.plist */,
+				89D694BC23E0F5F4003EC695 /* Prototype2Tests */,
 			);
 			path = Prototype2;
 			sourceTree = "<group>";
@@ -365,7 +365,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				893C135023F40E20000C87B3 /* TextToSpeech in Resources */,
+				8938429E245B95C600A8FA25 /* TextToSpeech in Resources */,
 				89D694B323E0F5F4003EC695 /* LaunchScreen.storyboard in Resources */,
 				89D694B023E0F5F4003EC695 /* Assets.xcassets in Resources */,
 				89D694AE23E0F5EF003EC695 /* Main.storyboard in Resources */,

@@ -359,63 +359,139 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9BEE9AD6-4888-4D2D-AE3F-9EA9A7EF86FD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Prototype2/MVVControllerViewCon troller.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "locationManager(_:didEnterRegion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "73A68FA1-05A7-4328-802C-EBEC117F75F0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Prototype2/MVVControllerViewCon troller.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "tapGestureAction(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2EFA8499-208D-4487-9DAD-9D59BD7C918A"
+            uuid = "F472CAA2-02BA-4DA5-8F0D-4A5D7BA6FD10"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prototype2/MVVControllerViewCon troller.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "locationManager(_:didEnterRegion:)"
-            landmarkType = "7">
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "MVVControllerViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "36329EF1-FFAB-47B8-9F41-F974CD6467CF"
-            shouldBeEnabled = "Yes"
+            uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            filePath = "Prototype2/SpeechSynthetizer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "SpeechSynthetizer"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99 - 4433bc36f211ca63"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.speechReqTask.getter : Swift.Optional&lt;__C.SFSpeechRecognitionTask&gt;"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99 - 388c675f0adb565f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.speechReqTask.setter : Swift.Optional&lt;__C.SFSpeechRecognitionTask&gt;"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99 - 369e77dc8f5e436c"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.speechReqTask.modify : Swift.Optional&lt;__C.SFSpeechRecognitionTask&gt;"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99 - 59ca9a358a219cc8"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.speechReqTask.modify : Swift.Optional&lt;__C.SFSpeechRecognitionTask&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99 - 1bc0f8345752f953"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Prototype2.SpeechSynthetizer"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "CA5E8FB3-6F93-4E6B-B4D8-84B2F29A1F99 - 8e793d689f256894"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Prototype2.SpeechSynthetizer&gt;"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "264">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F394395-DE82-4900-AC69-3333540A2F2B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/SpeechSynthetizer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -423,32 +499,304 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BC087984-024B-4E31-8405-87D547B057E1"
-            shouldBeEnabled = "Yes"
+            uuid = "065355A9-1B38-41B2-80FA-5968E79236C8"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prototype2/MVVControllerViewCon troller.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "MVVControllerViewController"
-            landmarkType = "21">
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0AEDAB44-6FA1-4350-813A-83AAB4F3CCE0"
+            uuid = "83FCEACD-932F-4A7F-B855-C7A19871B9C6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73582C3D-4085-486A-B4BD-8D6BF3C84164"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/SpeechSynthetizer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "isAuthorized()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "73582C3D-4085-486A-B4BD-8D6BF3C84164 - b508eb7dfc3d6366"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.SpeechSynthetizer.isAuthorized() -&gt; Swift.Bool"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "252">
+               </Location>
+               <Location
+                  uuid = "73582C3D-4085-486A-B4BD-8D6BF3C84164 - b4750a0c2f5a3465"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.SFSpeechRecognizerAuthorizationStatus) -&gt; () in Prototype2.SpeechSynthetizer.isAuthorized() -&gt; Swift.Bool"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/SpeechSynthetizer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1D262D55-E12B-4C54-B5CC-C994119DBBF6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/SpeechSynthetizer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "isAuthorized()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4B1E4EC-86D9-47C1-97A2-E1C926E13B76"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "responseLocationConfirmation(location:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "83E7180B-6164-4D78-A7EA-CC25794C8319"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "buttonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "839DA914-584B-4202-A3CD-EF6C078AA09B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/SpeechSynthetizer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "isAuthorized()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7106FFE4-46B5-4927-AF84-2D91F8030A17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "userIsSpeaking(withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "912625B3-2BDD-4E7F-8901-410B8C373BAA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "getLoactionTask(withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CCAA3E3A-191E-4D58-AD7A-340B40D7A7F5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "responseLocationConfirmation(location:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8B1587A9-CB07-4C91-9350-EA1AB70E8E94"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "responseLocationConfirmation(location:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CC532E15-AA14-46A1-93ED-9B4217421A17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
+            landmarkName = "buttonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "95A1CEE7-E543-49A0-8F37-AFD6DE232BEE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Prototype2/MVVControllerViewCon troller.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "getDirections(to:)"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "buttonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2C41B0D3-8741-4102-A9C0-404B48A3612D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "buttonPressed(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FA30A3A4-A715-4E70-BA8D-1F404908F353"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/ObjectDetectionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "ObjectDetectionViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "53713D0A-73C6-424A-9792-092C9906F344"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "596EE7F8-2E49-4438-8032-84F8B9179702"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/MVVControllerViewCon troller.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "test()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
