@@ -28,7 +28,7 @@ class ObjectDetectionViewController: DetectionController {
     }
     @IBOutlet weak var objectLable: UILabel!
     @IBOutlet weak var accuracyLabel: UILabel!
-    var object = "nil"
+   // var object = "nil"
     var topLabelObservation: AnyObject!
     
     @discardableResult
@@ -85,9 +85,13 @@ class ObjectDetectionViewController: DetectionController {
             detectionOverlay.addSublayer(shapeLayer)
             object = getObject()
             print(object)
-            mvv.object = object
+          //  mvv.object = object
           //  var o = segue.destination as! MVVControllerViewController
          //   o.object = self.object
+           // let vc = MVVControllerViewController(nibName: "MVVControllerViewControllergg", bundle: nil)
+          //  let vc = MViewController(nibName: "MViewController", bundle: nil)
+           // vc.object = "it works ffs"
+            
         }
         self.updateLayerGeometry()
         CATransaction.commit()
@@ -169,6 +173,7 @@ class ObjectDetectionViewController: DetectionController {
         textLayer.foregroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.0, 0.0, 1.0])
         textLayer.contentsScale = 2.0 // retina rendering
         // rotate the layer into screen orientation and scale and mirror
+        objPosition = self.getObjLocatio(objectY: textLayer.position.y)
         textLayer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: 1.0, y: -1.0))
         return textLayer
     }
@@ -190,7 +195,37 @@ class ObjectDetectionViewController: DetectionController {
         }
         return object
     }
- /*   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func getObjLocatio(objectY:CGFloat) -> String{
+        var position = "nil"
+        let screen =  UIScreen.main.bounds
+        let screenMiddle = screen.width / 2
+        let halfScreen = screenMiddle / 2
+        
+        //Left side bounds
+        let startLeftSide = 0.0 as CGFloat
+        let endLeftSide = screenMiddle - halfScreen
+        let leftSideRange = startLeftSide...endLeftSide
+        //right side bounds
+        let startRightSide = screenMiddle + halfScreen
+        let endRightSide = screen.width
+        let rightSideRange = startRightSide...endRightSide
+        //middle part bounds
+        let startMiddleSide = endLeftSide + 0.01
+        let endMiddleSide = startRightSide - 0.01
+        let middleSideRange = startMiddleSide...endMiddleSide
+        
+        if leftSideRange.contains(objectY){
+            position = "on your left side"
+        }
+        else if middleSideRange.contains(objectY){
+            position = "in front of you"
+        }
+        else if rightSideRange.contains(objectY){
+            position = "on your right side"
+        }
+        return position
+    }
+  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var o = segue.destination as! MVVControllerViewController
         o.object = self.object
     }*/

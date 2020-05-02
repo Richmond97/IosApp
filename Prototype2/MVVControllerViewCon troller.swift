@@ -42,7 +42,7 @@ class MVVControllerViewController: UIViewController {
     var locationUserSaid = "nil"
     var desiredlocation = "nil"
     var running = true
-    var object = ""
+    var object: String = ""
  
     override func viewDidLoad() {
         
@@ -51,7 +51,7 @@ class MVVControllerViewController: UIViewController {
         locationManger.delegate = self
         locationManger.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManger.startUpdatingLocation()
-        tapGesture.isEnabled = true
+      //  tapGesture.isEnabled = true
         super.viewDidLoad()
         vc.startSpeaking(messaage: "HI, i am your voice assistant, tap to begin ")
         delegateDetectedObject()
@@ -122,13 +122,14 @@ class MVVControllerViewController: UIViewController {
             self.mapView.addOverlay(mainPath.polyline)
             self.eachStep = mainPath.steps
             
+            // print(self.eachStep.first(where: <#T##(MKRoute.Step) throws -> Bool#>))
             for i in 0 ..< mainPath.steps.count {
                 let  currStep = i
-                
+             //   print(" eachStep is: \(self.eachStep)")
                 let nextStep = mainPath.steps[i]
-                print(nextStep.instructions)
-                print(nextStep.distance)
-               
+             //   print(nextStep.instructions)
+            //    print(nextStep.distance)
+               print("yes")
                 let turnRegion = CLCircularRegion(center: nextStep.polyline.coordinate,
                                           radius: 10,
                                           identifier: "\(i)")
@@ -139,8 +140,8 @@ class MVVControllerViewController: UIViewController {
                 self.stepsCount += 1
                 //
                 let nextMove = self.calculateNextMove(to: self.eachStep[currStep])
-                let distance = nextMove[0]
-                let info = nextMove[0]
+             //   let distance = nextMove[0]
+               // let info = nextMove[0]
             }
         }
     }
@@ -184,7 +185,7 @@ class MVVControllerViewController: UIViewController {
         print("You would like to got to \(location), is that correct?")
     }
     func responseLocationConfirmation(location: String,withCompletionHandler completionHandler: @escaping((_ response: String, _ finshed: Bool) -> Void)){
-        var confirmed = "nil"
+      //  var confirmed = "nil"
         self.userIsSpeaking { (answer, finished) in
             if finished {
                 if answer == "Yes"{
@@ -305,7 +306,7 @@ extension MVVControllerViewController: CLLocationManagerDelegate{
         guard let currLocation = locations.first else {return}
         currentCoordinate = currLocation.coordinate
         print("my location is \(currentCoordinate)")
-        mapView.userTrackingMode = .followWithHeading
+      //  mapView.userTrackingMode = .followWithHeading
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {

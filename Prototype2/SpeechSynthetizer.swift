@@ -16,6 +16,7 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
     var speechReqTask: SFSpeechRecognitionTask?
     let audioEngine = AVAudioEngine()
     var instructions: String = "nil"
+    let serialQueue = DispatchQueue(label: "swiftlee.serial.queue")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +122,10 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
              }
     completionHandler("",false)
         }
+    
     public func startSpeaking(messaage: String){
+      //  DispatchQueue.global(qos: .background).sync {
+            serialQueue.async{
      /*  let audioSession = AVAudioSession.sharedInstance()
               do {
                   try audioSession.setCategory(AVAudioSession.Category.playback)
@@ -133,11 +137,14 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
        */
        // Dis
         let speechUtterance = AVSpeechUtterance(string: messaage)
+        speechUtterance.postUtteranceDelay = 5
         speechUtterance.voice = AVSpeechSynthesisVoice (language: "en-GB")
         speechUtterance.rate = 0.5
        // speechUtterance.pitchMultiplier = 0.1
         speechUtterance.volume = 0.9
         let synthetizer = AVSpeechSynthesizer()
         synthetizer.speak(speechUtterance)
+        
+        }
     }
 }

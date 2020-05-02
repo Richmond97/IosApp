@@ -21,7 +21,8 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
-        
+        self.title =  "Object Detection"
+        //self.navigationController.pu
 
        // let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
                                //           leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
@@ -30,6 +31,12 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
      //   let rigtSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
                         //                 rigtSwipe.direction = UISwipeGestureRecognizer.Direction.right
               //                           self.view.addGestureRecognizer(rigtSwipe)
+    }
+    @IBAction func tapGesture(){
+        let vc = storyboard?.instantiateViewController(identifier: "maps") as! MViewController
+      //  let vc = MViewController(nibName: "MViewController", bundle: nil)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IAg-wO-SNR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TCo-pH-uHa">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -7,12 +7,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Controller View Controller-->
+        <!--View Controller-->
         <scene sceneID="rKq-Mk-WB1">
             <objects>
-                <viewController id="sBQ-05-TpT" customClass="MVVControllerViewController" customModule="Prototype2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="maps" id="sBQ-05-TpT" customClass="MViewController" customModule="Prototype2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Lp-nr-DGZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X71-ZK-Hfb">
@@ -67,6 +67,9 @@
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="view">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <viewLayoutGuide key="safeArea" id="t3B-3x-eX0"/>
                     </view>
                     <navigationItem key="navigationItem" id="oaB-nV-LrR"/>
@@ -86,7 +89,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-169862.31884057971" y="-3201.5625"/>
+            <point key="canvasLocation" x="-167586" y="-3202"/>
         </scene>
         <!--Maps View Controller-->
         <scene sceneID="y3E-1j-3eg">
@@ -139,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6q-8o-Jot" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-169039" y="-3218"/>
+            <point key="canvasLocation" x="-169509" y="-2418"/>
         </scene>
         <!--Object Detection View Controller-->
         <scene sceneID="UAa-BZ-LfR">
@@ -163,12 +166,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KhH-KS-Kqx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="d3r-LT-Ws2">
                     <connections>
-                        <action selector="start:" destination="IAg-wO-SNR" id="mmc-xQ-vov"/>
-                        <segue destination="sBQ-05-TpT" kind="presentation" identifier="startMap" id="5F6-O4-FLJ"/>
+                        <action selector="tapGesture" destination="IAg-wO-SNR" id="CDm-73-PyB"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-168129" y="-3218"/>
+            <point key="canvasLocation" x="-168362" y="-3202"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="duB-vd-kWu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TCo-pH-uHa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mGb-cG-Vwo">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IAg-wO-SNR" kind="relationship" relationship="rootViewController" id="q09-je-P6E"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OcP-ES-YHQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-169130" y="-3202"/>
         </scene>
     </scenes>
 </document>
