@@ -2,10 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>speech recognition required</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>required</string>
+	<key>NSLocationUsageDescription</key>
+	<string>required</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>required</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>mic required</string>
+	<key>NSCameraUsageDescription</key>
+	<string>acces to camera</string>
+	<key>CFBundleGetInfoString</key>
+	<string></string>
+	<key>CFBundleDisplayName</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera required for the correct functionality of the mobile application</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X71-ZK-Hfb">
-                                <rect key="frame" x="0.0" y="44" width="414" height="165"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpd-eE-AMc">
@@ -33,22 +33,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ggI-t7-Ura">
-                                        <rect key="frame" x="277" y="71" width="45" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="record"/>
-                                        <connections>
-                                            <action selector="buttonPressed:" destination="sBQ-05-TpT" eventType="touchUpInside" id="fA7-Fd-NZ1"/>
-                                        </connections>
-                                    </button>
-                                    <searchBar contentMode="redraw" fixedFrame="YES" text="" translatesAutoresizingMaskIntoConstraints="NO" id="8pH-FL-pqO">
-                                        <rect key="frame" x="0.0" y="101" width="414" height="56"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" spellCheckingType="yes" enablesReturnKeyAutomatically="YES" textContentType="location"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="sBQ-05-TpT" id="YPF-kF-Eub"/>
-                                        </connections>
-                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -56,13 +40,12 @@
                                 <rect key="frame" x="189" y="503" width="37" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6d-4e-YXc">
-                                <rect key="frame" x="0.0" y="217" width="414" height="679"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" showsScale="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o6d-4e-YXc">
+                                <rect key="frame" x="0.0" y="168" width="414" height="728"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="sBQ-05-TpT" id="nwF-T3-T8J"/>
-                                    <outletCollection property="gestureRecognizers" destination="FqT-Cf-pm2" appends="YES" id="qM8-oe-RyH"/>
                                 </connections>
                             </mapView>
                         </subviews>
@@ -70,26 +53,34 @@
                         <accessibility key="accessibilityConfiguration" identifier="view">
                             <bool key="isElement" value="YES"/>
                         </accessibility>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="t3B-3x-eX0"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="vE5-Z0-ZC3" appends="YES" id="fs7-Sj-2kp"/>
+                            <outletCollection property="gestureRecognizers" destination="vaf-GT-I2G" appends="YES" id="lPV-XE-GV0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="oaB-nV-LrR"/>
                     <connections>
                         <outlet property="lblDirection" destination="Tpd-eE-AMc" id="U6a-bW-8aN"/>
                         <outlet property="lblTitle" destination="cd9-L0-tej" id="ULn-VC-3ZO"/>
                         <outlet property="mapView" destination="o6d-4e-YXc" id="gLe-DX-fV5"/>
-                        <outlet property="searchBar" destination="8pH-FL-pqO" id="qIk-gJ-TOL"/>
-                        <outlet property="tapGesture" destination="ggI-t7-Ura" id="a7D-gK-Giv"/>
                         <outlet property="voiceActivityIndicator" destination="Xve-iO-SSS" id="ZKw-bG-DGX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tgx-wy-Ppz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer delaysTouchesBegan="YES" id="FqT-Cf-pm2">
+                <tapGestureRecognizer numberOfTapsRequired="2" id="vE5-Z0-ZC3">
                     <connections>
-                        <action selector="tapGestureAction:" destination="sBQ-05-TpT" id="CXN-Ub-zPu"/>
+                        <action selector="tapTwice:" destination="sBQ-05-TpT" id="ixF-WY-RQW"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="vaf-GT-I2G">
+                    <connections>
+                        <action selector="firstResponder:" destination="sBQ-05-TpT" id="nnh-Xn-W0K"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-167586" y="-3202"/>
+            <point key="canvasLocation" x="-167586.95652173914" y="-3202.2321428571427"/>
         </scene>
         <!--Maps View Controller-->
         <scene sceneID="y3E-1j-3eg">

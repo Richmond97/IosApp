@@ -1,4 +1,4 @@
-framework module Direction {
+module Direction {
   umbrella header "Direction-umbrella.h"
 
   export *

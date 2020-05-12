@@ -17,6 +17,8 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
     let audioEngine = AVAudioEngine()
     var instructions: String = "nil"
     let serialQueue = DispatchQueue(label: "swiftlee.serial.queue")
+    var canSpeak = true
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,7 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
         return authorize
     }
    public func startListening(withCompletionHandler completionHandler: @escaping((_ instructions: String, _ finshed: Bool) -> Void)){
+
         
         if speechReqTask != nil{
                 speechReqTask?.cancel()
@@ -124,27 +127,42 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
         }
     
     public func startSpeaking(messaage: String){
-      //  DispatchQueue.global(qos: .background).sync {
-            serialQueue.async{
-     /*  let audioSession = AVAudioSession.sharedInstance()
-              do {
-                  try audioSession.setCategory(AVAudioSession.Category.playback)
-                  try audioSession.setActive(false, options: .notifyOthersOnDeactivation)
-              } catch {
-                  // handle errors
-                  print("Audio session failed to setup, can't speek")
-              }
-       */
-       // Dis
-        let speechUtterance = AVSpeechUtterance(string: messaage)
-        speechUtterance.postUtteranceDelay = 5
-        speechUtterance.voice = AVSpeechSynthesisVoice (language: "en-GB")
-        speechUtterance.rate = 0.5
-       // speechUtterance.pitchMultiplier = 0.1
-        speechUtterance.volume = 0.9
-        let synthetizer = AVSpeechSynthesizer()
-        synthetizer.speak(speechUtterance)
-        
+        DispatchQueue.main.async {
+             let synthetizer = AVSpeechSynthesizer()
+              //  DispatchQueue.global(qos: .background).sync {
+               // if !synthetizer.isSpeaking{
+            if self.canSpeak{
+                let speechUtterance = AVSpeechUtterance(string: messaage)
+                speechUtterance.postUtteranceDelay = 5
+                speechUtterance.voice = AVSpeechSynthesisVoice (language: "en-GB")
+                speechUtterance.rate = 0.5
+               // speechUtterance.pitchMultiplier = 0.1
+                speechUtterance.volume = 0.9
+                //let synthetizer = AVSpeechSynthesizer()
+                synthetizer.speak(speechUtterance)
+               // self.canSpeak = false
+                    
+                }
+                else{
+
+                    synthetizer.stopSpeaking(at: AVSpeechBoundary.word)
+                  //  DispatchQueue.main.asyncAfter(deadline: .now() + 10){}
+                print("can not speak ")
+                                        
+                }
         }
+
+        
+    }
+}
+
+
+extension SpeechSynthetizer:AVSpeechSynthesizerDelegate{
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
+                           didFinish utterance: AVSpeechUtterance){
+        self.canSpeak = true
+    }
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        self.canSpeak = false
     }
 }

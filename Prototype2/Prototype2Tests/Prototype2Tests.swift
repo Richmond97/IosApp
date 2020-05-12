@@ -10,25 +10,180 @@ import XCTest
 @testable import Prototype2
 
 class Prototype2Tests: XCTestCase {
+    var obj: ObjectDetectionViewController!
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        obj = ObjectDetectionViewController()
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        obj = nil
+        super.tearDown()
+        
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testObjectLocation(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        let y = 500.6328125
+        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        XCTAssertEqual(getLocation, "in front of you", "Score computed from guess is wrong")
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testObjectLocation2(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        let y = 470.6328125
+        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        XCTAssertEqual(getLocation, "in front of you", "Wrong location")
     }
-
+    func testObjectLocation3(){
+           //Left 0...270
+           //midle 270.01...540.01
+           //right 540.02...812
+           let y = 274.6328125
+           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           XCTAssertEqual(getLocation, "in front of you", "Wrong location")
+       }
+    func testObjectLocation4(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        let y = 570.6328125
+        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        XCTAssertEqual(getLocation, "on your right side", "Wrong location")
+    }
+    func testObjectLocation5(){
+           //Left 0...270
+           //midle 270.01...540.01
+           //right 540.02...812
+           let y = 674.6328125
+           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           XCTAssertEqual(getLocation, "on your right side", "Wrong location")
+       }
+    func testObjectLocation6(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        let y = 170.6328125
+        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        XCTAssertEqual(getLocation, "on your left side", "Wrong location")
+    }
+    func testObjectLocation7(){
+           //Left 0...270
+           //midle 270.01...540.01
+           //right 540.02...812
+           let y = 94.6328125
+           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           XCTAssertEqual(getLocation, "on your left side", "Wrong location")
+       }
+    func testGetObj(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":70],
+            [ "dog" :(80)],
+            [ "Traffic Light":(96)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "Traffic Light", "wrong object")
+    }
+    func testGetObj2(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":70],
+            [ "dog" :(80)],
+            [ "car":(96)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "car", "wrong object")
+    }
+    func testGetObj3(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":70],
+            [ "dog" :(80)],
+            [ "person":(96)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "person", "wrong object")
+    }
+    func testGetObj4(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":70],
+            [ "dog" :(80)],
+            [ "car":(23)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "nil", "wrong object")
+    }
+    
+    func testGetObj5(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":70],
+            [ "dog" :(80)],
+            [ "car":(96)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "car", "wrong object")
+    }
+    func testGetObj6(){
+           //Left 0...270
+           //midle 270.01...540.01
+           //right 540.02...812
+           var objects:[[String:Int]]!
+           objects  = [
+               ["car":70],
+               [ "bike" :(80)],
+               [ "bike":(80)],
+           ]
+           let result = obj.getObjectTest(objects:objects)
+           XCTAssertEqual(result, "bike", "wrong object")
+       }
+    func testGetObj7(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":40],
+            [ "bike" :(0)],
+            [ "bike":(80)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "nil", "wrong object")
+    }
+    func testGetObj8(){
+        //Left 0...270
+        //midle 270.01...540.01
+        //right 540.02...812
+        var objects:[[String:Int]]!
+        objects  = [
+            ["car":70],
+            [ "person" :(20)],
+            [ "car":(70)],
+        ]
+        let result = obj.getObjectTest(objects:objects)
+        XCTAssertEqual(result, "nil", "wrong object")
+    }
+    
+    
 }

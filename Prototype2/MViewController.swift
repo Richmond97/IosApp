@@ -31,6 +31,8 @@ class MViewController: UIViewController {
          let speachSynthesizer = AVSpeechSynthesizer()
          let locationManger = CLLocationManager()
          var currentCoordinate: CLLocationCoordinate2D!
+         var currentLocation: CLLocation!
+    
          
          var instructions: String = "000"
          var tasksSequence: Array = [1,0,0,0,0]
@@ -41,8 +43,10 @@ class MViewController: UIViewController {
          var locationUserSaid = "nil"
          var desiredlocation = "nil"
          var running = true
+         var count = 0
+         var giveSeconfIns = false
     
-         var expectedTravelTime: TimeInterval = 0.0
+         var expectedTravelTime: TimeInterval = 0
          var nameOfDestination = "unknown"
       
          override func viewDidLoad() {
@@ -50,33 +54,23 @@ class MViewController: UIViewController {
              
              locationManger.requestAlwaysAuthorization()
              locationManger.delegate = self
-             locationManger.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+             locationManger.desiredAccuracy = kCLLocationAccuracyBest
+             locationManger.activityType = .fitness
              locationManger.startUpdatingLocation()
+            
            //  tapGesture.isEnabled = true
              super.viewDidLoad()
              vc.startSpeaking(messaage: "HI, i am your voice assistant, tap to begin ")
-             delegateDetectedObject()
             
          }
 
 
         
-      /*  @IBAction func tapGestureAction(_ sender: Any) {
-
-            if  audioEngine.isRunning{
-                voiceActivityIndicator.stopAnimating()
-                audioEngine.stop()
-                recognitionReq?.endAudio()
-                tapGesture.isEnabled = false
-                lblTitle.text = "Record"
-            }else{
-                voiceActivityIndicator.startAnimating()
-                startListening()
-                lblTitle.text = "Stop"
-            }
-        }*/
-         
-        func calculateNextMove(to nextTurn: MKRoute.Step) -> Array<Any>{
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        let when = DispatchTime.now() + delay
+        DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+    }
+    func calculateNextMove(to nextTurn: MKRoute.Step) -> Array<Any>{
             var nextTurnInfo: Array<Any> = []
             let distance = nextTurn.distance
             let info = nextTurn.instructions
@@ -84,17 +78,19 @@ class MViewController: UIViewController {
             nextTurnInfo.append(info)
             return nextTurnInfo
         }
-        func alertStartingJourney(){
-            vc.startSpeaking(messaage: "Ok let's begin, I am taking you to \(nameOfDestination), and will roughly take about \(expectedTravelTime) minutes")
-            print("Ok I am taking you to\(nameOfDestination), and will roughly take about \(expectedTravelTime)")
+    func alertStartingJourney(){
+            expectedTravelTime = expectedTravelTime / 60
+            self.vc.startSpeaking(messaage: "Ok let's begin, I am taking you to  \(self.nameOfDestination), and will roughly take about \(Int(self.expectedTravelTime)) minutes")
+            self.delay(10){
+                self.vc.startSpeaking(messaage: "proceed straight for \(self.eachStep[0].distance) meters, \(self.eachStep[0].instructions)")
+            }
         }
-        func userIsSpeaking(withCompletionHandler completionHandler: @escaping((_ instruction: String, _ finshed: Bool) -> Void)){
+    func userIsSpeaking(withCompletionHandler completionHandler: @escaping((_ instruction: String, _ finshed: Bool) -> Void)){
             if  vc.audioEngine.isRunning{
                 lblTitle.text = "stoped recording"
                 voiceActivityIndicator.stopAnimating()
                 vc.audioEngine.stop()
                 vc.recognitionReq?.endAudio()
-                delegateDetectedObject()
             }else{
                 lblTitle.text = "now recording"
                 voiceActivityIndicator.startAnimating()
@@ -106,60 +102,54 @@ class MViewController: UIViewController {
                     completionHandler("",false)
                     }
                 }
-                delegateDetectedObject()
-                //self.mapOps.geocodeAdr(address: address, withCompletionHandler: { (status, success) -> Void in
             }
         }
-        func getDirections(to destionation: MKMapItem){
-            let sourceMark = MKPlacemark(coordinate: currentCoordinate)
-            let sourceDirection = MKMapItem(placemark: sourceMark)
-            let directionRequest = MKDirections.Request()
-            directionRequest.source = sourceDirection
-            directionRequest.destination = destionation
-            directionRequest.transportType = .walking
-            delegateDetectedObject()
-            let direction = MKDirections(request: directionRequest)
-            direction.calculate { (response, error) in
-                guard let response = response else { return }
-                guard let mainPath = response.routes.first  else { return }
-                self.expectedTravelTime =  mainPath.expectedTravelTime
-              //  self.nameOfDestination = mainPath.name
+    func getDirections(to destionation: MKMapItem){
+        let sourceMark = MKPlacemark(coordinate: currentCoordinate)
+        let sourceDirection = MKMapItem(placemark: sourceMark)
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = sourceDirection
+        directionRequest.destination = destionation
+        directionRequest.transportType = .walking
+        let direction = MKDirections(request: directionRequest)
+        direction.calculate { (response, error) in
+            guard let response = response else { return }
+            guard let mainPath = response.routes.first  else { return }
+            self.expectedTravelTime =  mainPath.expectedTravelTime
+            
+            self.mapView.addOverlay(mainPath.polyline)
+            
+            // self.locationManger.monitoredRegions.forEach({ self.locationManger.stopMonitoring(for: $0) })
+            
+            self.eachStep = mainPath.steps
+            for i in 0 ..< mainPath.steps.count {
+                let  currStep = i
                 
-                self.mapView.addOverlay(mainPath.polyline)
+                // print("the var eachStep is:\(self.eachStep)")
                 
+                let nextStep = mainPath.steps[i]
+                print(nextStep.instructions)
+                print(nextStep.distance)
                 
-             //   self.locationManger.monitoredRegions.forEach({self.locationManger.stopMonitoring(for: <#T##CLRegion#>)})
-                self.locationManger.monitoredRegions.forEach({ self.locationManger.stopMonitoring(for: $0) })
+                let turnRegion = CLCircularRegion(center: nextStep.polyline.coordinate,
+                                            radius: 20,
+                                            identifier: "\(i)")
+                self.locationManger.startMonitoring(for: turnRegion)
                 
-                self.eachStep = mainPath.steps
-                for i in 0 ..< mainPath.steps.count {
-                    let  currStep = i
-                    
-                   // print("the var eachStep is:\(self.eachStep)")
-                    
-                    let nextStep = mainPath.steps[i]
-                    print(nextStep.instructions)
-                    print(nextStep.distance)
-                   
-                    let turnRegion = CLCircularRegion(center: nextStep.polyline.coordinate,
-                                              radius: 20,
-                                              identifier: "\(i)")
-                    self.locationManger.startMonitoring(for: turnRegion)
-                    
-                   // (for: turnRegion)
-                    let mradius = MKCircle(center: turnRegion.center, radius: turnRegion.radius)
-                    turnRegion.notifyOnEntry = true
-                    self.mapView.addOverlay(mradius)
-                 //   self.stepsCount += 1
-                    //
-                    let nextMove = self.calculateNextMove(to: self.eachStep[currStep])
-                    let distance = nextMove[0]
-                    let info = nextMove[0]
-                }
-                self.alertStartingJourney()
+                // (for: turnRegion)
+                let mradius = MKCircle(center: turnRegion.center, radius: turnRegion.radius)
+                turnRegion.notifyOnEntry = true
+                self.mapView.addOverlay(mradius)
+                //   self.stepsCount += 1
+                //
+                let nextMove = self.calculateNextMove(to: self.eachStep[currStep])
+                let distance = nextMove[0]
+                let info = nextMove[0]
             }
+            self.alertStartingJourney()
         }
-        func searchLocation(location:String,withCompletionHandler completionHandler: @escaping(( _ finshed: Bool) -> Void)){
+    }
+    func searchLocation(location:String,withCompletionHandler completionHandler: @escaping(( _ finshed: Bool) -> Void)){
             let searchRequest = MKLocalSearch.Request()
                         searchRequest.naturalLanguageQuery = location
                         let region = MKCoordinateRegion(center:currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1
@@ -173,99 +163,112 @@ class MViewController: UIViewController {
                             guard let location = response.mapItems.first else{return}
                             self.nameOfDestination = location.name!
                             self.getDirections(to: location)
-                            self.delegateDetectedObject()
                             completionHandler(true)
+                          //  self.delagateNavigation()
             }
         }
-        func getLoactionTask(withCompletionHandler completionHandler: @escaping((_ location: String, _ finshed: Bool) -> Void)){
+    func getLoactionTask(withCompletionHandler completionHandler: @escaping((_ location: String, _ finshed: Bool) -> Void)){
             self.userIsSpeaking { (location, finished) in
                 if finished{
                     print("end reocrding")
                     completionHandler(location,true)
-                    self.delegateDetectedObject()
                 }
             else{
              //   DispatchQueue.global(qos: .background).async{
-                    self.vc.startSpeaking(messaage: "Where would you like to go?")
-                    print("Where would you like to go?")
+                  //  self.vc.startSpeaking(messaage: "Where would you like to go?")
+                  //  print("Where would you like to go?")
             //    }
                     completionHandler("",false)
             }
            
         }
     }
-        func questionconfirmLoactioTask(location: String){
+    func questionconfirmLoactioTask(location: String){
             
-            print("confirming location")
+            print("confirming location...")
             vc.startSpeaking(messaage: "You would like to go to \(location), is that correct?")
-            print("You would like to go to \(location), is that correct?")
         }
-        func responseLocationConfirmation(location: String,withCompletionHandler completionHandler: @escaping((_ response: String, _ finshed: Bool) -> Void)){
-            var confirmed = "nil"
-            self.userIsSpeaking { (answer, finished) in
-                if finished {
-                    if answer == "Yes"{
-                        completionHandler( answer, true)
-                        
-                    }
-                    else if answer == "No"{
-                       // DispatchQueue.main.async{
-                        self.vc.startSpeaking(messaage: "Sorry, I didn't get that")
-                        completionHandler( answer, false)
-                        print("Sorry, I didn't get that")
-                     //   self.getLoactionTask { (location, finished) in
-                    //    }
-                   //     self.questionconfirmLoactioTask(location: location)
-                   //     self.responseLocationConfirmation(location: location) { (response, finished) in
-                      //  }
-                          //  }
-                    }
-                    else{
-                      //  DispatchQueue.main.async{
-                        self.vc.startSpeaking(messaage: "Pleas answer with a yes or no")
-                        print("Pleas answer with a yes or no")
-                        self.questionconfirmLoactioTask(location: location)
-                  //      self.responseLocationConfirmation(location: location) { (response, finished) in
-                    //    }
-                        completionHandler( "unkwon", false)
-                }
-            }
+    func responseLocationConfirmation(location: String,withCompletionHandler completionHandler: @escaping((_ response: String, _ finshed: Bool) -> Void)){
+        var confirmed = "nil"
+        self.userIsSpeaking { (answer, finished) in
+            if finished {
+                if answer == "Yes"{
+                    completionHandler( answer, true)
                     
-                else{
-                    print("started listening")
                 }
+                else if answer == "No"{
+                    // DispatchQueue.main.async{
+                    self.vc.startSpeaking(messaage: "Sorry, I didn't get that")
+                    completionHandler( answer, false)
+                    print("Sorry, I didn't get that")
+                }
+                else{
+                    self.vc.startSpeaking(messaage: "Pleas answer with a yes or no")
+                    print("Pleas answer with a yes or no")
+                    //self.questionconfirmLoactioTask(location: location)
+                    completionHandler( "unkwon", false)
             }
         }
-        func delegateDetectedObject(){
-                print("detected object is:  \(object)")
+                
+            else{
+                print("started listening")
+            }
         }
-        func delagateNavigation(){
-            var x = 0
-            while !running {
-                x = x + 1
-                if x == 60{
-                    x = 0
-                    if object != "nil" && objPosition != "nil"{
-                            self.vc.startSpeaking(messaage: "Careful!, there is a \(object),\(objPosition) ")
-                            
-                        }
-                        else{print("object ignored")
-                    }
+    }
+    func delagateNavigation(){
+
+        DispatchQueue.main.async {
+                self.delay(7){
+                if object != "nil" && objPosition != "nil"{
+                    self.vc.startSpeaking(messaage: "Careful!, there is a \(object),\(objPosition) ")
+                    //if !self.running{self.delagateNavigation()}
+            }
+                
+        }
+    }
+}
+    func findCurrentLocation(completionHandler: @escaping (CLPlacemark?,_ success:Bool)
+                         -> Void ) {
+             // Use the last reported location.
+            if let lastLocation = currentLocation{
+                 let geocoder = CLGeocoder()
+                     
+                 // Look up the location and pass it to the completion handler
+                geocoder.reverseGeocodeLocation(lastLocation,
+                             completionHandler: { (placemarks, error) in
+                     if error == nil {
+                         let firstLocation = placemarks?[0]
+                        completionHandler(firstLocation, true)
+                     }
+                     else {
+                      // An error occurred during geocoding.
+                         completionHandler(nil, false)
+                     }
+                 })
+             }
+             else {
+                 // No location was available.
+                 completionHandler(nil, false)
+             }
+         }
+    @IBAction func tapTwice(_ sender: Any) {
+                  print("works")
+            findCurrentLocation { (location,success) in
+                if success == true{
+                    self.vc.startSpeaking(messaage: " you are currently in, \(location?.name ?? "notFound"),and the postal code is, \(location?.postalCode ?? "notFound")")
+                    
                 }
             }
     }
-        
-        func delay(duration: Int){
-            var i = 0
-            while i < duration{
-            }
-            return
-        }
-        
-        @IBAction func buttonPressed(_ sender: Any) {
-            delegateDetectedObject()
+    @IBAction func firstResponder(_ sender: Any) {
+        if tasksSequence[0] == 1{
+             tasksSequence[0] = 0
+            vc.startSpeaking(messaage: "Where would you like to go")
+                 tasksSequence[1] = 1
+             return
+         }
             //get location
-            if tasksSequence[0] == 1{
+        else if tasksSequence[1] == 1{
                 if tapCount < 2{
                     self.getLoactionTask { (location, finished) in
                         if finished{
@@ -275,8 +278,8 @@ class MViewController: UIViewController {
                     }
                     //go to next task
                     if tapCount == 1 {
-                        tasksSequence[0] = 0
-                        tasksSequence[1] = 1
+                        tasksSequence[1] = 0
+                        tasksSequence[2] = 1
                         tapCount = 0
                         return
                         }
@@ -287,42 +290,40 @@ class MViewController: UIViewController {
                 }
             }
             //answer to confirm location
-            else if tasksSequence[1] == 1{
-                 tasksSequence[1] = 0
+            else if tasksSequence[2] == 1{
+                 tasksSequence[2] = 0
                  questionconfirmLoactioTask(location: desiredlocation)
-                     tasksSequence[2] = 1
+                     tasksSequence[3] = 1
                  return
              }
             //responce to confirm location
-            else if tasksSequence[2] == 1{
+            else if tasksSequence[3] == 1{
                     if tapCount1 < 2{
                             self.responseLocationConfirmation(location: desiredlocation) { (response, finished) in
                                 if response == "Yes"{
                                     self.searchLocation(location: self.desiredlocation)
                                     { (completed) in
                                         if completed{
-                                         //   self.delay(duration: 50)
-                                           // self.delagateNavigation()
                                             self.running = false
+                                            
                                         }
                                     }
-                                    
                                 }
                                 else if response == "No"{
                                     self.desiredlocation = ""
                                     self.tasksSequence[0] = 1
-                                    self.tasksSequence[2] = 0
+                                    self.tasksSequence[3] = 0
                                     self.tapCount1 = 0
                                     return
                                 }
                                 else if response == "unkwon" {
-                                    self.tasksSequence[1] = 1
-                                    self.tasksSequence[2] = 0
+                                    self.tasksSequence[2] = 1
+                                    self.tasksSequence[3] = 0
                                 }
                         }
                     if tapCount1 == 1{
-                        tasksSequence[2] = 0
-                        tasksSequence[3] = 1
+                        tasksSequence[3] = 0
+                        tasksSequence[4] = 1
                         tapCount1 = 0
                         return
                     }
@@ -333,78 +334,64 @@ class MViewController: UIViewController {
             }
             
         }
-            else if tasksSequence[3] == 1{
+            else if tasksSequence[4] == 1{
                 
             }
             
         }
-        func startObjectDetectionDelegate(){
-            if !self.running{
-                self.delagateNavigation()
-            }
     }
-    
-    }
-
-
         
     //get User current location
     extension MViewController: CLLocationManagerDelegate{
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            manager.stopUpdatingLocation()
+          //  manager.stopUpdatingLocation()
+            //manager.startUpdatingLocation()
             guard let currLocation = locations.first else {return}
             currentCoordinate = currLocation.coordinate
-            print("my location is \(currentCoordinate)")
+            currentLocation = currLocation
+           // print("my location is \(currentCoordinate)")
+           // lblDirection.text = String(currLocation)
             mapView.userTrackingMode = .followWithHeading
-        }
-        
-        func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-            var step = 0
-            if region is CLCircularRegion{
-                print("in region")
-                          vc.startSpeaking(messaage: "entered in region")
-                          while step < self.eachStep.count-1{
-                              let step = step + 1
-                              vc.startSpeaking(messaage: "in \(eachStep[step].distance) \(eachStep[step].instructions)")
-                              print("in \(eachStep[step].distance) \(eachStep[step].instructions)")
-                          }
+            if !running{
+                self.delay(10){
+                   // DispatchQueue.main.asyncAfter(deadline: .now() + 7){
+                    self.delagateNavigation()//}
+                    //self.simulateNavigation()
+                }
             }
-       // stepsCount += 1
-            
-    /*    if stepsCount < eachStep.count {
-            let currentStep = eachStep[stepsCount]
-            let message = "In \(currentStep.distance) meters, \(currentStep.instructions)"
-            lblDirection.text = message
-            let speechUtterance = AVSpeechUtterance(string: message)
-            speachSynthesizer.speak(speechUtterance)
-        } else {
-            let message = "Arrived at destination"
-            lblDirection.text = message
-            let speechUtterance = AVSpeechUtterance(string: message)
-            speachSynthesizer.speak(speechUtterance)
-            stepsCount = 0
-            } */
+        }
+        func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+           
+            if region is CLCircularRegion{
+                if !running{
+                print("in region \(count)")
+                   // lblDirection.text = "in region \(count)"
+                          if count < self.eachStep.count{
+                           self.vc.startSpeaking(messaage: "proceed  straight for \(self.eachStep[self.count].distance) meters \(self.eachStep[self.count].instructions)")
+                              print("proceeed for \(eachStep[count].distance) \(eachStep[count].instructions)")
+                            self.count += 1
+                          }
+                          else {
+                            self.vc.startSpeaking(messaage: "Arrived at destination")
+                            giveSeconfIns = true
+                }
+            }
         }
     }
-    //Search location
-    /*extension MVVControllerViewController: UISearchBarDelegate{
-        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            searchBar.endEditing(true)
-            let searchRequest = MKLocalSearch.Request()
-            searchRequest.naturalLanguageQuery = searchBar.text
-            let region = MKCoordinateRegion(center:currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1
-                , longitudeDelta: 0.1))
-            searchRequest.region = region
-            let nearestSearch = MKLocalSearch(request: searchRequest)
-            nearestSearch.start { (response, _) in
-                guard let response = response else {return}
-                print(response.mapItems.first)
-                //grab first item
-                guard let desiredLocation = response.mapItems.first else{return}
-                self.getDirections(to: desiredLocation)
+        func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        //self.stepsCount += 1
+        if region is CLCircularRegion{
+            lblDirection.text = "exited region \(count)"
+             if giveSeconfIns{
+                if count < self.eachStep.count-1{
+            print("eixtet  region")
+                      vc.startSpeaking(messaage: "exited region")
+                   //   self.vc.startSpeaking(messaage: "procced  straight for \(self.eachStep[self.count+1].distance) //\(self.eachStep[self.count+1].instructions)")
+                }
             }
-        }*/
-    //Display path
+            }
+        }
+    }
     extension MViewController: MKMapViewDelegate{
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if overlay is MKPolyline{
@@ -425,65 +412,4 @@ class MViewController: UIViewController {
         }
     }
 
-    /*extension MVVControllerViewController: SFSpeechRecognizerDelegate{
-
-       public func startListening() /*-> String*/ {
-            if speechReqTask != nil{
-                speechReqTask?.cancel()
-                speechReqTask = nil
-            }
-            let listeningSession = AVAudioSession.sharedInstance()
-            do{
-                try listeningSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-              //  try listeningSession.setActive(true, options: .notifyOthersOnDeactivation)
-            }catch{
-                print("Audio session failed to setup")
-            }
-        
-            recognitionReq = SFSpeechAudioBufferRecognitionRequest()
-            let inputNode = audioEngine.inputNode
-            guard let recognitionReg = recognitionReq else {
-                fatalError("Request Instance failed")
-            }
-        
-            recognitionReq?.shouldReportPartialResults = true
-            speechReqTask = speechRecognizer?.recognitionTask(with: recognitionReg){
-                result, error in
-                var isLast = false
-                if result != nil{
-                    isLast = (result?.isFinal)!
-                }
-                //error != nil ||
-                if  error != nil || isLast{
-                    
-                    self.audioEngine.stop()
-                    inputNode.removeTap(onBus: 0)
-                    self.recognitionReq = nil
-                    self.speechReqTask = nil
-                    self.tapGesture.isEnabled = true
-                    let tts = result?.bestTranscription.formattedString
-                    self.lblDirection.text = tts
-                    print("you said: \(String(describing: tts))")
-                }
-                else if error != nil{
-                    print(error)
-                }
-            }
-        let audioFormat = inputNode.outputFormat(forBus: 0)
-         inputNode.installTap(onBus: 0, bufferSize: 1024, format: audioFormat){
-           (audioBuffer: AVAudioPCMBuffer, when: AVAudioTime)
-            in
-             self.recognitionReq?.append(audioBuffer)
-         }
-             self.audioEngine.prepare()
-         do{
-             try self.audioEngine.start()
-             
-         }catch{
-             print("failed to start engine")
-             
-             }
-        }
-    }
-    */
-
+   

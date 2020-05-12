@@ -7,7 +7,7 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
     
-    @IBOutlet weak private var belowView: UIView!
+    @IBOutlet weak public var belowView: UIView!
     private let session = AVCaptureSession()
     private var belowLayer: AVCaptureVideoPreviewLayer! = nil
     private let videoDataOutput = AVCaptureVideoDataOutput()
@@ -22,15 +22,6 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
         super.viewDidLoad()
         setupAVCapture()
         self.title =  "Object Detection"
-        //self.navigationController.pu
-
-       // let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
-                               //           leftSwipe.direction = UISwipeGestureRecognizer.Direction.left
-                               //           self.view.addGestureRecognizer(leftSwipe)
-                     
-     //   let rigtSwipe = UISwipeGestureRecognizer(target: self, action: #selector(myswipeAction(swipe:)))
-                        //                 rigtSwipe.direction = UISwipeGestureRecognizer.Direction.right
-              //                           self.view.addGestureRecognizer(rigtSwipe)
     }
     @IBAction func tapGesture(){
         let vc = storyboard?.instantiateViewController(identifier: "maps") as! MViewController
@@ -51,13 +42,14 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
         let videoDevice = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back).devices.first
         do {
             deviceInput = try AVCaptureDeviceInput(device: videoDevice!)
+            
         } catch {
             print("Could not create video device input: \(error)")
             return
         }
         
         session.beginConfiguration()
-        session.sessionPreset = .vga640x480 // Model image size is smaller.
+        session.sessionPreset =  .vga640x480 // Model image size is smaller.
         
         // Add a video input
         guard session.canAddInput(deviceInput) else {

@@ -18,7 +18,6 @@ import TensorFlowLite
 class ObjectDetectionViewController: DetectionController {
     
     private var detectionOverlay: CALayer! = nil
-    var mvv = MVVControllerViewController()
     
     // Vision parts
     private var requests = [VNRequest]()
@@ -30,6 +29,26 @@ class ObjectDetectionViewController: DetectionController {
     @IBOutlet weak var accuracyLabel: UILabel!
    // var object = "nil"
     var topLabelObservation: AnyObject!
+    var listObject: Array = ["nil","nil","nil"]
+    var line = UIBezierPath()
+    var screen =  UIScreen.main.bounds
+    let sectionWidth = CGFloat()
+    //Left side bounds
+    var startLeftSide = 0.0 as CGFloat
+    var endLeftSide = CGFloat()
+    var leftSideRange:ClosedRange<CGFloat> = 0...0
+    //middle part bounds
+    var startMiddleSide = CGFloat()
+    var endMiddleSide = CGFloat()
+    var middleSideRange:ClosedRange<CGFloat> = 0...0
+    //right side bounds
+    var startRightSide = CGFloat()
+    var endRightSide = CGFloat()
+    var rightSideRange:ClosedRange<CGFloat> = 0...0
+    //test variable
+    var objects:[[String:Int]]!
+    var index = 0
+    var result: String = "nil"
     
     @discardableResult
     func modelSetup() -> NSError?
@@ -38,6 +57,7 @@ class ObjectDetectionViewController: DetectionController {
          guard let modelURL = Bundle.main.url(forResource: "YOLOv3Tiny", withExtension: "mlmodelc")
             else
                 {
+                   
                    return NSError(domain: "ObjectDetectiontionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
                 }
         do {
@@ -63,7 +83,32 @@ class ObjectDetectionViewController: DetectionController {
                   
                   return error
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initView()
+
+        belowView.addSubview(drawLine(position: endLeftSide))
+        belowView.addSubview(drawLine(position: endRightSide))
+        belowView.addSubview(drawLine(position: endMiddleSide))
+    }
     
+    func initView(){
+        var screen =  UIScreen.main.bounds
+        let sectionWidth = screen.height / 3
+        //Left side bounds
+        startLeftSide = 0.0 as CGFloat
+        endLeftSide = startLeftSide + sectionWidth
+        leftSideRange = startLeftSide...endLeftSide
+        //middle part bounds
+        startMiddleSide = endLeftSide + 0.01
+        endMiddleSide = startMiddleSide + sectionWidth
+        middleSideRange = startMiddleSide...endMiddleSide
+        //right side bounds
+        startRightSide = endMiddleSide + 0.01
+        endRightSide = startRightSide + sectionWidth
+        rightSideRange = startRightSide...endRightSide
+        print("right side range :  \(rightSideRange)")
+    }
     func objectRequestResults(_ results: [Any]) {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
@@ -72,8 +117,9 @@ class ObjectDetectionViewController: DetectionController {
             guard let objectObservation = observation as? VNRecognizedObjectObservation else {
                 continue
             }
-            // Select only the label with the highest confidence.
+            // Select only the object with the highest confidence.
             topLabelObservation = objectObservation.labels[0]
+            
             let objectBounds = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(bufferSize.width), Int(bufferSize.height))
             
             let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
@@ -85,13 +131,7 @@ class ObjectDetectionViewController: DetectionController {
             detectionOverlay.addSublayer(shapeLayer)
             object = getObject()
             print(object)
-          //  mvv.object = object
-          //  var o = segue.destination as! MVVControllerViewController
-         //   o.object = self.object
-           // let vc = MVVControllerViewController(nibName: "MVVControllerViewControllergg", bundle: nil)
-          //  let vc = MViewController(nibName: "MViewController", bundle: nil)
-           // vc.object = "it works ffs"
-            
+               
         }
         self.updateLayerGeometry()
         CATransaction.commit()
@@ -162,8 +202,8 @@ class ObjectDetectionViewController: DetectionController {
     func createTextSubLayerInBounds(_ bounds: CGRect, identifier: String, confidence: VNConfidence) -> CATextLayer {
         let textLayer = CATextLayer()
         textLayer.name = "Object "
-        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nConfidence Score:  %.2f", confidence))
-        let largeFont = UIFont(name: "Helvetica", size: 24.0)!
+        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nConfidence :  %.2f", confidence))
+        let largeFont = UIFont(name: "Helvetica", size: 14.0)!
         formattedString.addAttributes([NSAttributedString.Key.font: largeFont], range: NSRange(location: 0, length: identifier.count))
         textLayer.string = formattedString
         textLayer.bounds = CGRect(x: 0, y: 0, width: bounds.size.height - 10, height: bounds.size.width - 10)
@@ -173,7 +213,7 @@ class ObjectDetectionViewController: DetectionController {
         textLayer.foregroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.0, 0.0, 1.0])
         textLayer.contentsScale = 2.0 // retina rendering
         // rotate the layer into screen orientation and scale and mirror
-        objPosition = self.getObjLocatio(objectY: textLayer.position.y)
+        objPosition = self.getObjLocatio(objectY: textLayer.position.x)
         textLayer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: 1.0, y: -1.0))
         return textLayer
     }
@@ -187,55 +227,103 @@ class ObjectDetectionViewController: DetectionController {
         shapeLayer.cornerRadius = 7
         return shapeLayer
     }
-    
-    func getObject() -> String{
-        if topLabelObservation.confidence > 0.60 {
-           object = topLabelObservation.identifier as String
 
-        }
-        return object
+    func getObject() -> String{
+               if topLabelObservation.confidence > 0.60 {
+               
+               object = topLabelObservation.identifier as String
+                if listObject[0] == "nil"{
+                    listObject[0] = object
+                    return "nil"
+                }
+                else{
+                    if listObject[1] == "nil"{
+                        listObject[1] = object
+                        return "nil"
+                    }
+                    else{
+                        if listObject[0] == listObject[1] {
+                            listObject[0] = object
+                            listObject[1] = "nil"
+                            object = "nil"
+                        }
+                        else{
+                            listObject[0] = object
+                            listObject[1] = "nil"              }
+                    }
+                }
+            }
+            else{
+                object = "nil"
+            }
+            listObject[0] = "nil"
+            listObject[1] = "nil"
+            return object
     }
-    func getObjLocatio(objectY:CGFloat) -> String{
-        var position = "nil"
-        let screen =  UIScreen.main.bounds
-        let screenMiddle = screen.width / 2
-        let halfScreen = screenMiddle / 2
+    
+    func getObjectTest(objects:[[String:Int]]) -> String{
         
-        //Left side bounds
-        let startLeftSide = 0.0 as CGFloat
-        let endLeftSide = screenMiddle - halfScreen
-        let leftSideRange = startLeftSide...endLeftSide
-        //right side bounds
-        let startRightSide = screenMiddle + halfScreen
-        let endRightSide = screen.width
-        let rightSideRange = startRightSide...endRightSide
-        //middle part bounds
-        let startMiddleSide = endLeftSide + 0.01
-        let endMiddleSide = startRightSide - 0.01
-        let middleSideRange = startMiddleSide...endMiddleSide
+      //  var listObject: Array = ["nil","nil","nil"]
+          let newObj = objects[index]
+          index += 1
+            for (name,confidence) in newObj{
+               if confidence > 60 {
+                   if listObject[0] == "nil"{
+                       listObject[0] = name
+                    getObjectTest(objects: objects)
+                   }
+                   else{
+                       if listObject[1] == "nil"{
+                           listObject[1] = name
+                        getObjectTest(objects: objects)
+                       }
+                       else{
+                           if listObject[0] == listObject[1] {
+                            print (listObject[0],listObject[1])
+                               listObject[0] = name
+                               listObject[1] = "nil"
+                               result = "nil"
+                           }
+                           else{
+                               listObject[0] = name
+                               listObject[1] = "nil"
+                               result = name
+                           }
+                       }
+                   }
+               }
+               else{
+               }
+               
+            }
+        return result
+    }
+    
+    func getObjLocatio(objectY:CGFloat) -> String{
+        self.initView()
+        var position = "nil"
         
         if leftSideRange.contains(objectY){
             position = "on your left side"
+
         }
         else if middleSideRange.contains(objectY){
             position = "in front of you"
+
         }
         else if rightSideRange.contains(objectY){
             position = "on your right side"
+
         }
         return position
     }
-  /*  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var o = segue.destination as! MVVControllerViewController
-        o.object = self.object
-    }*/
- /*   @IBAction func start(_ sender: Any) {
-        func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "startMap"{
-                _ = segue.destination as! MVVControllerViewController
-            }
-        }
-    }*/
+    
+    func drawLine(position: CGFloat)->UIView{
+        let lineView = UIView(frame: CGRect(x: 0, y: position, width: screen.width, height:2.0))
+        lineView.layer.borderWidth = 1.0
+        lineView.layer.borderColor = UIColor.red.cgColor
+        return lineView
+    }
 }
 
 

@@ -1,4 +1,4 @@
-framework module TensorFlowLite {
+module TensorFlowLite {
   umbrella header "TensorFlowLiteSwift-umbrella.h"
 
   export *

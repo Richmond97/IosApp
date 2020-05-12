@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "91522E51AB6114344C02F71701B8D0B3"
-               BuildableName = "Direction.framework"
+               BuildableName = "libDirection.a"
                BlueprintName = "Direction"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

@@ -23,7 +23,6 @@ SPEC REPOS:
     - Direction
     - GoogleMaps
     - GooglePlaces
-  trunk:
     - TensorFlowLiteC
     - TensorFlowLiteSwift
 
@@ -34,6 +33,6 @@ SPEC CHECKSUMS:
   TensorFlowLiteC: 215603d4426d93810eace5947e317389554a4b66
   TensorFlowLiteSwift: 9d8137f18d5ac30ca89bba4fbe118e0949ac5743
 
-PODFILE CHECKSUM: 427154706c2fb9a3767759f67cb77e05ee9d1b26
+PODFILE CHECKSUM: b8a0f6c18b35614bbca0b9be1307a48a65f30aac
 
 COCOAPODS: 1.9.1
