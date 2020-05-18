@@ -54,14 +54,14 @@ class ObjectDetectionViewController: DetectionController {
     func modelSetup() -> NSError?
     {
          let error: NSError! = nil
-         guard let modelURL = Bundle.main.url(forResource: "YOLOv3Tiny", withExtension: "mlmodelc")
+         guard let modelPath = Bundle.main.url(forResource: "YOLOv3Tiny", withExtension: "mlmodelc")
             else
                 {
                    
-                   return NSError(domain: "ObjectDetectiontionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
+                   return NSError(domain: "ObjectDetectiontionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "ERROR no Model"])
                 }
         do {
-            let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
+            let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelPath))
             let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler:
             {
                 (request, error) in
@@ -78,7 +78,7 @@ class ObjectDetectionViewController: DetectionController {
             }
             catch let error as NSError
             {
-                print("Couldnt'Load the model: \(error)")
+                print("ERROR I couldnt' add the model: \(error)")
             }
                   
                   return error
@@ -93,7 +93,7 @@ class ObjectDetectionViewController: DetectionController {
     }
     
     func initView(){
-        var screen =  UIScreen.main.bounds
+        let screen =  UIScreen.main.bounds
         let sectionWidth = screen.height / 3
         //Left side bounds
         startLeftSide = 0.0 as CGFloat
@@ -106,8 +106,7 @@ class ObjectDetectionViewController: DetectionController {
         //right side bounds
         startRightSide = endMiddleSide + 0.01
         endRightSide = startRightSide + sectionWidth
-        rightSideRange = startRightSide...endRightSide
-        print("right side range :  \(rightSideRange)")
+        rightSideRange = startRightSide...screen.height
     }
     func objectRequestResults(_ results: [Any]) {
         CATransaction.begin()
@@ -202,8 +201,8 @@ class ObjectDetectionViewController: DetectionController {
     func createTextSubLayerInBounds(_ bounds: CGRect, identifier: String, confidence: VNConfidence) -> CATextLayer {
         let textLayer = CATextLayer()
         textLayer.name = "Object "
-        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nConfidence :  %.2f", confidence))
-        let largeFont = UIFont(name: "Helvetica", size: 14.0)!
+        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nScore :  %.2f", confidence))
+        let largeFont = UIFont(name: "Helvetica", size: 10.0)!
         formattedString.addAttributes([NSAttributedString.Key.font: largeFont], range: NSRange(location: 0, length: identifier.count))
         textLayer.string = formattedString
         textLayer.bounds = CGRect(x: 0, y: 0, width: bounds.size.height - 10, height: bounds.size.width - 10)
@@ -262,8 +261,6 @@ class ObjectDetectionViewController: DetectionController {
     }
     
     func getObjectTest(objects:[[String:Int]]) -> String{
-        
-      //  var listObject: Array = ["nil","nil","nil"]
           let newObj = objects[index]
           index += 1
             for (name,confidence) in newObj{
@@ -300,19 +297,19 @@ class ObjectDetectionViewController: DetectionController {
     }
     
     func getObjLocatio(objectY:CGFloat) -> String{
-        self.initView()
+      //  self.initView() //uncomment for testing
         var position = "nil"
         
         if leftSideRange.contains(objectY){
             position = "on your left side"
 
         }
-        else if middleSideRange.contains(objectY){
-            position = "in front of you"
-
-        }
         else if rightSideRange.contains(objectY){
             position = "on your right side"
+
+        }
+        else if middleSideRange.contains(objectY){
+            position = "in front of you"
 
         }
         return position

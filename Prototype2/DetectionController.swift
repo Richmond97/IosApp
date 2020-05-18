@@ -6,45 +6,45 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer! = nil
+    var vc = SpeechSynthetizer()
     
     @IBOutlet weak public var belowView: UIView!
     private let session = AVCaptureSession()
     private var belowLayer: AVCaptureVideoPreviewLayer! = nil
-    private let videoDataOutput = AVCaptureVideoDataOutput()
+    private let vdOutput = AVCaptureVideoDataOutput()
     
-    private let videoDataOutputQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    private let captureQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // to be implemented in the subclass
+        // this will be used in in the ObjetcDetection class
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAVCapture()
         self.title =  "Object Detection"
+        vc.startSpeaking(messaage: "HI, i am your voice assistant, tap to begin ",type: "indication")
     }
     @IBAction func tapGesture(){
         let vc = storyboard?.instantiateViewController(identifier: "maps") as! MViewController
-      //  let vc = MViewController(nibName: "MViewController", bundle: nil)
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func setupAVCapture() {
         var deviceInput: AVCaptureDeviceInput!
         
-        // Select a video device, make an input
+        // Choose device for video input
         let videoDevice = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back).devices.first
         do {
             deviceInput = try AVCaptureDeviceInput(device: videoDevice!)
             
         } catch {
-            print("Could not create video device input: \(error)")
+            print("ERROR Could video input failed: \(error)")
             return
         }
         
@@ -53,23 +53,23 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
         
         // Add a video input
         guard session.canAddInput(deviceInput) else {
-            print("Could not add video device input to the session")
+            print("ERROR video session failed")
             session.commitConfiguration()
             return
         }
         session.addInput(deviceInput)
-        if session.canAddOutput(videoDataOutput) {
-            session.addOutput(videoDataOutput)
+        if session.canAddOutput(vdOutput) {
+            session.addOutput(vdOutput)
             // Add a video data output
-            videoDataOutput.alwaysDiscardsLateVideoFrames = true
-            videoDataOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)]
-            videoDataOutput.setSampleBufferDelegate(self, queue: videoDataOutputQueue)
+            vdOutput.alwaysDiscardsLateVideoFrames = true
+            vdOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)]
+            vdOutput.setSampleBufferDelegate(self, queue: captureQueue)
         } else {
-            print("Could not add video data output to the session")
+            print("ERROR failed to add video data to the session")
             session.commitConfiguration()
             return
         }
-        let captureConnection = videoDataOutput.connection(with: .video)
+        let captureConnection = vdOutput.connection(with: .video)
         // Always process the frames
         captureConnection?.isEnabled = true
         do {

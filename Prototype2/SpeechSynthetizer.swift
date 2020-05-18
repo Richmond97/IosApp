@@ -18,6 +18,10 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
     var instructions: String = "nil"
     let serialQueue = DispatchQueue(label: "swiftlee.serial.queue")
     var canSpeak = true
+    var synthetizer = AVSpeechSynthesizer()
+    
+
+    
 
 
     override func viewDidLoad() {
@@ -30,10 +34,11 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
             try listeningSession.setActive(true, options: .notifyOthersOnDeactivation)
         }catch{
             print("Audio session failed to setup")
+            synthetizer.delegate = self
         }
-
-               
     }
+    
+
     func isAuthorized() -> Bool {
         var authorize = false
         speechRecognizer?.delegate = self
@@ -42,20 +47,16 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
             switch status{
             case .authorized:
                 authorize = true
-                   //    self.tapGesture.isEnabled = authorize
                 print("SR authorized ")
             case .denied:
                 print("SR not authorized ")
                 authorize = false
-                   //    self.tapGesture.isEnabled = authorize
             case .notDetermined:
                 authorize = false
                 print(" SR permission not granted")
-                  //     self.tapGesture.isEnabled = authorize
             case .restricted:
                 authorize = false
                 print("SR not supported ")
-                  //     self.tapGesture.isEnabled = authorize
                        
             @unknown default:
                        fatalError()
@@ -63,21 +64,11 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
         }
         return authorize
     }
-   public func startListening(withCompletionHandler completionHandler: @escaping((_ instructions: String, _ finshed: Bool) -> Void)){
-
-        
+    public func startListening(withCompletionHandler completionHandler: @escaping((_ instructions: String, _ finshed: Bool) -> Void)){
         if speechReqTask != nil{
                 speechReqTask?.cancel()
                 speechReqTask = nil
             }
-          /*  let listeningSession = AVAudioSession.sharedInstance()
-            do{
-                try listeningSession.setCategory(.record, mode: .measurement, options: .duckOthers)
-                try listeningSession.setActive(true, options: .notifyOthersOnDeactivation)
-            }catch{
-                print("Audio session failed to setup")
-            }*/
-        
             recognitionReq = SFSpeechAudioBufferRecognitionRequest()
             let inputNode = audioEngine.inputNode
             guard let recognitionReg = recognitionReq else {
@@ -91,18 +82,14 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
                 if result != nil{
                     isLast = (result?.isFinal)!
                 }
-                //error != nil ||
                 if  error != nil || isLast{
                     
                     self.audioEngine.stop()
                     inputNode.removeTap(onBus: 0)
                     self.recognitionReq = nil
                     self.speechReqTask = nil
-                  //  self.tapGesture.isEnabled = true
                     let tts = result?.bestTranscription.formattedString
-                 //   self.lblDirection.text = tts
                     print("you said: \(tts ?? "error")")
-                   // self.instructions = tts!
                     completionHandler(tts ?? "something went wrong",true)
                 }
                 else if error != nil{
@@ -126,43 +113,39 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
     completionHandler("",false)
         }
     
-    public func startSpeaking(messaage: String){
-        DispatchQueue.main.async {
-             let synthetizer = AVSpeechSynthesizer()
-              //  DispatchQueue.global(qos: .background).sync {
-               // if !synthetizer.isSpeaking{
-            if self.canSpeak{
+    public func startSpeaking(messaage: String, type: String ){
+      DispatchQueue.main.async {
+             
+            self.synthetizer.delegate = self
+        //allow speech only when the previus session has been completed
+        if self.canSpeak{
                 let speechUtterance = AVSpeechUtterance(string: messaage)
-                speechUtterance.postUtteranceDelay = 5
                 speechUtterance.voice = AVSpeechSynthesisVoice (language: "en-GB")
                 speechUtterance.rate = 0.5
-               // speechUtterance.pitchMultiplier = 0.1
                 speechUtterance.volume = 0.9
-                //let synthetizer = AVSpeechSynthesizer()
-                synthetizer.speak(speechUtterance)
-               // self.canSpeak = false
-                    
-                }
+                self.synthetizer.speak(speechUtterance)
+                self.canSpeak = true
+              }
                 else{
-
-                    synthetizer.stopSpeaking(at: AVSpeechBoundary.word)
-                  //  DispatchQueue.main.asyncAfter(deadline: .now() + 10){}
-                print("can not speak ")
-                                        
+                    if type == "obj"{
+                            self.synthetizer.stopSpeaking(at: AVSpeechBoundary.immediate)
+                        
+                    }
                 }
         }
-
-        
     }
 }
 
-
-extension SpeechSynthetizer:AVSpeechSynthesizerDelegate{
+extension SpeechSynthetizer: AVSpeechSynthesizerDelegate{
+    //avoid speech synthetizer to have 2 utterance in one session
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance){
-        self.canSpeak = true
+            self.canSpeak = true
+            print("finished speaking")
+        
     }
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         self.canSpeak = false
+        print("started speaking ")
     }
 }

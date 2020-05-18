@@ -79,6 +79,22 @@ class Prototype2Tests: XCTestCase {
            let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
            XCTAssertEqual(getLocation, "on your left side", "Wrong location")
        }
+    func testObjectLocation8(){
+           //Left 0...270
+           //midle 270.01...540.01
+           //right 540.02...812
+           let y = -94.6328125
+           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           XCTAssertEqual(getLocation, "nil", "Wrong location")
+       }
+    func testObjectLocation9(){
+              //Left 0...270
+              //midle 270.01...540.01
+              //right 540.02...812
+              let y = 43265.6328125
+              let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+              XCTAssertEqual(getLocation, "nil", "Wrong location")
+          }
     func testGetObj(){
         //Left 0...270
         //midle 270.01...540.01
@@ -110,11 +126,9 @@ class Prototype2Tests: XCTestCase {
         //midle 270.01...540.01
         //right 540.02...812
         var objects:[[String:Int]]!
-        objects  = [
-            ["car":70],
-            [ "dog" :(80)],
-            [ "person":(96)],
-        ]
+        objects  = [["car":70],
+                    [ "dog" :(80)],
+                    [ "person":(96)],]
         let result = obj.getObjectTest(objects:objects)
         XCTAssertEqual(result, "person", "wrong object")
     }
@@ -138,16 +152,16 @@ class Prototype2Tests: XCTestCase {
         //right 540.02...812
         var objects:[[String:Int]]!
         objects  = [
-            ["car":70],
+            ["tree":70],
             [ "dog" :(80)],
-            [ "car":(96)],
+            [ "tree":(96)],
         ]
         let result = obj.getObjectTest(objects:objects)
-        XCTAssertEqual(result, "car", "wrong object")
+        XCTAssertEqual(result, "tree", "wrong object")
     }
     func testGetObj6(){
            //Left 0...270
-           //midle 270.01...540.01
+           //midle 270.01...540.01 Test name     Test reference    Test input     Test expected output    Test verdict
            //right 540.02...812
            var objects:[[String:Int]]!
            objects  = [

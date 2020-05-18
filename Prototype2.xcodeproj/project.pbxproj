@@ -666,7 +666,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Richmond-Yeboah.Prototype2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Prototype2;
 				SWIFT_OBJC_BRIDGING_HEADER = "Prototype2-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -689,7 +689,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Richmond-Yeboah.Prototype2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Prototype2;
 				SWIFT_OBJC_BRIDGING_HEADER = "Prototype2-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "~/Library/Developer/Xcode/DerivedData/{Prototype2}/Build/Products/Debug/{Project Name}.app/Contents/MacOS";
