@@ -780,7 +780,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "171"
             endingLineNumber = "171"
-            landmarkName = "getLoactionTask(withCompletionHandler:)"
+            landmarkName = "searchLocation(location:withCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -828,7 +828,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "421"
             endingLineNumber = "421"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -844,7 +844,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "421"
             endingLineNumber = "421"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -860,8 +860,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
             endingLineNumber = "200"
-            landmarkName = "ObjectDetectionViewController"
-            landmarkType = "3">
+            landmarkName = "layerConfigurationUpdate()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -874,9 +874,9 @@
             filePath = "Prototype2/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "createTextSubLayerInBounds(_:identifier:confidence:)"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
+            landmarkName = "layerConfigurationUpdate()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -892,7 +892,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "255"
             endingLineNumber = "255"
-            landmarkName = "simulateNavigation(_:)"
+            landmarkName = "findCurrentLocation(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -956,7 +956,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "425"
             endingLineNumber = "425"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1004,7 +1004,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "427"
             endingLineNumber = "427"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1020,7 +1020,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "237"
             endingLineNumber = "237"
-            landmarkName = "findCurrentLocation(completionHandler:)"
+            landmarkName = "delagateNavigation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1034,9 +1034,9 @@
             filePath = "Prototype2/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "getObjLocatio(objectY:)"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
+            landmarkName = "getObjectTest(objects:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1066,8 +1066,8 @@
             filePath = "Prototype2/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "getObjectTest(objects:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1082,8 +1082,8 @@
             filePath = "Prototype2/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "getObjectTest(objects:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1098,8 +1098,8 @@
             filePath = "Prototype2/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "getObjectTest(objects:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1148,8 +1148,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "SpeechSynthetizer"
-            landmarkType = "3">
+            landmarkName = "startSpeaking(messaage:type:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1180,7 +1180,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
             endingLineNumber = "423"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1196,7 +1196,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "424"
             endingLineNumber = "424"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1244,7 +1244,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
             endingLineNumber = "426"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
+            landmarkName = "firstResponder(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1260,7 +1260,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "239"
             endingLineNumber = "239"
-            landmarkName = "findCurrentLocation(completionHandler:)"
+            landmarkName = "delagateNavigation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1358,6 +1358,54 @@
             endingLineNumber = "382"
             landmarkName = "firstResponder(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6D902C59-B2E6-46E1-B8BB-1FE172E04E54"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prototype2/DetectionController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "10"
+            endingLineNumber = "10"
+            landmarkName = "DetectionController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "6D902C59-B2E6-46E1-B8BB-1FE172E04E54 - 10f2e4bbc22a47e0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.DetectionController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Prototype2.DetectionController"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/DetectionController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "532">
+               </Location>
+               <Location
+                  uuid = "6D902C59-B2E6-46E1-B8BB-1FE172E04E54 - 286fa036f016cbff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prototype2.DetectionController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Prototype2.DetectionController&gt;"
+                  moduleName = "Prototype2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/richmondyeboah/Desktop/Final%20Year%20Project/Prototype2/Prototype2/DetectionController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "492">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

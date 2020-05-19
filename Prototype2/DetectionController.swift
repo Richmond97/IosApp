@@ -4,15 +4,15 @@ import Vision
 
 class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    var bufferSize: CGSize = .zero
-    var rootLayer: CALayer! = nil
     var vc = SpeechSynthetizer()
+    var buffeCapacity: CGSize = .zero
+    var mainLayer: CALayer! = nil
+   
     
     @IBOutlet weak public var belowView: UIView!
-    private let session = AVCaptureSession()
     private var belowLayer: AVCaptureVideoPreviewLayer! = nil
     private let vdOutput = AVCaptureVideoDataOutput()
-    
+    private let captureSession = AVCaptureSession()
     private let captureQueue = DispatchQueue(label: "VideoDataOutput", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -34,7 +34,12 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    func captureOutput(_ captureOutput: AVCaptureOutput, didDrop didDropSampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    }
     
+    func startCaptureSession() {
+        captureSession.startRunning()
+    }
     func setupAVCapture() {
         var deviceInput: AVCaptureDeviceInput!
         
@@ -44,82 +49,80 @@ class DetectionController: UIViewController, AVCaptureVideoDataOutputSampleBuffe
             deviceInput = try AVCaptureDeviceInput(device: videoDevice!)
             
         } catch {
-            print("ERROR Could video input failed: \(error)")
+            print("ERROR video input failed: \(error)")
             return
         }
         
-        session.beginConfiguration()
-        session.sessionPreset =  .vga640x480 // Model image size is smaller.
+        captureSession.beginConfiguration()
+        captureSession.sessionPreset =  .vga640x480 // adding the size of the image to be proccessed according to the model (416 x 416)
+                                                    // model image input suze should be smaller
         
         // Add a video input
-        guard session.canAddInput(deviceInput) else {
+        guard captureSession.canAddInput(deviceInput) else {
             print("ERROR video session failed")
-            session.commitConfiguration()
+            captureSession.commitConfiguration()
             return
         }
-        session.addInput(deviceInput)
-        if session.canAddOutput(vdOutput) {
-            session.addOutput(vdOutput)
+        captureSession.addInput(deviceInput)
+        if captureSession.canAddOutput(vdOutput) {
+            captureSession.addOutput(vdOutput)
             // Add a video data output
             vdOutput.alwaysDiscardsLateVideoFrames = true
             vdOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)]
             vdOutput.setSampleBufferDelegate(self, queue: captureQueue)
         } else {
             print("ERROR failed to add video data to the session")
-            session.commitConfiguration()
+            captureSession.commitConfiguration()
             return
         }
         let captureConnection = vdOutput.connection(with: .video)
-        // Always process the frames
+        //Esures that all frames are processed
         captureConnection?.isEnabled = true
         do {
             try  videoDevice!.lockForConfiguration()
             let dimensions = CMVideoFormatDescriptionGetDimensions((videoDevice?.activeFormat.formatDescription)!)
-            bufferSize.width = CGFloat(dimensions.width)
-            bufferSize.height = CGFloat(dimensions.height)
+            buffeCapacity.width = CGFloat(dimensions.width)
+            buffeCapacity.height = CGFloat(dimensions.height)
             videoDevice!.unlockForConfiguration()
         } catch {
             print(error)
         }
-        session.commitConfiguration()
-        belowLayer = AVCaptureVideoPreviewLayer(session: session)
+        captureSession.commitConfiguration()
+        belowLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         belowLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        rootLayer = belowView.layer
-        belowLayer.frame = rootLayer.bounds
-        rootLayer.addSublayer(belowLayer)
+        mainLayer = belowView.layer
+        belowLayer.frame = mainLayer.bounds
+        mainLayer.addSublayer(belowLayer)
     }
     
-    func startCaptureSession() {
-        session.startRunning()
-    }
     
-    // Clean up capture setup
-    func teardownAVCapture() {
+    
+    // Restart Avcapture
+    func restartAVCapture() {
         belowLayer.removeFromSuperlayer()
         belowLayer = nil
     }
     
-    func captureOutput(_ captureOutput: AVCaptureOutput, didDrop didDropSampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        // print("frame dropped")
-    }
+
     
-    public func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
-        let curDeviceOrientation = UIDevice.current.orientation
-        let exifOrientation: CGImagePropertyOrientation
+    public func deviceOrientation() -> CGImagePropertyOrientation {
+        let orientation = UIDevice.current.orientation
+        let currOrientation: CGImagePropertyOrientation
         
-        switch curDeviceOrientation {
-        case UIDeviceOrientation.portraitUpsideDown:  // Device oriented vertically, home button on the top
-            exifOrientation = .left
-        case UIDeviceOrientation.landscapeLeft:       // Device oriented horizontally, home button on the right
-            exifOrientation = .upMirrored
-        case UIDeviceOrientation.landscapeRight:      // Device oriented horizontally, home button on the left
-            exifOrientation = .down
-        case UIDeviceOrientation.portrait:            // Device oriented vertically, home button on the bottom
-            exifOrientation = .up
+        switch orientation {
+        case UIDeviceOrientation.portrait:
+            currOrientation = .up
+        case UIDeviceOrientation.portraitUpsideDown:
+            currOrientation = .left
+        case UIDeviceOrientation.landscapeRight:
+            currOrientation = .down
+        case UIDeviceOrientation.landscapeLeft:
+            currOrientation = .upMirrored
+
         default:
-            exifOrientation = .up
+            currOrientation = .up
         }
-        return exifOrientation
+        return currOrientation
     }
 }
 extension UIViewController
@@ -137,3 +140,12 @@ extension UIViewController
         }
     }
 
+
+//**************************************************************************************/
+/*    Title:Recognizing Objects in Live Capture
+ *    Author: Copyright © 2020 Apple Inc. All rights reserved.
+ *    Date: 03/24/2020
+ *    Code version: 1.0
+ *    Availability: https://developer.apple.com/documentation/vision/recognizing_objects_in_live_capture
+ *
+***************************************************************************************/

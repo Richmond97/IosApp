@@ -17,7 +17,7 @@ import TensorFlowLite
 
 class ObjectDetectionViewController: DetectionController {
     
-    private var detectionOverlay: CALayer! = nil
+    private var overlay: CALayer! = nil
     
     // Vision parts
     private var requests = [VNRequest]()
@@ -28,7 +28,7 @@ class ObjectDetectionViewController: DetectionController {
     @IBOutlet weak var objectLable: UILabel!
     @IBOutlet weak var accuracyLabel: UILabel!
    // var object = "nil"
-    var topLabelObservation: AnyObject!
+    var highestScoreObj: AnyObject!
     var listObject: Array = ["nil","nil","nil"]
     var line = UIBezierPath()
     var screen =  UIScreen.main.bounds
@@ -51,26 +51,27 @@ class ObjectDetectionViewController: DetectionController {
     var result: String = "nil"
     
     @discardableResult
-    func modelSetup() -> NSError?
+    //load the model
+    func getModel() -> NSError?
     {
          let error: NSError! = nil
-         guard let modelPath = Bundle.main.url(forResource: "YOLOv3Tiny", withExtension: "mlmodelc")
+        //getting the model by defining its path
+         guard let modelPath = Bundle.main.url(forResource: "TinyYOLOv3_VOC", withExtension: "mlmodelc")
             else
                 {
-                   
                    return NSError(domain: "ObjectDetectiontionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "ERROR no Model"])
                 }
         do {
-            let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelPath))
-            let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler:
+            let myModel = try VNCoreMLModel(for: MLModel(contentsOf: modelPath))
+            let objectRecognition = VNCoreMLRequest(model: myModel, completionHandler:
             {
                 (request, error) in
             DispatchQueue.main.async(execute:
                 {
-                    // perform all the UI updates on the main queue
+                    // Executing all view upadtas in the main queue
                     if let results = request.results
                     {
-                        self.objectRequestResults(results)
+                        self.objectsReturned(results)
                     }
                 })
             })
@@ -86,12 +87,14 @@ class ObjectDetectionViewController: DetectionController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
-
+        
+        //Dividing the screen into 3 sections
         belowView.addSubview(drawLine(position: endLeftSide))
         belowView.addSubview(drawLine(position: endRightSide))
         belowView.addSubview(drawLine(position: endMiddleSide))
     }
     
+    //set screen boundaries (Left, Center, Right)
     func initView(){
         let screen =  UIScreen.main.bounds
         let sectionWidth = screen.height / 3
@@ -108,44 +111,47 @@ class ObjectDetectionViewController: DetectionController {
         endRightSide = startRightSide + sectionWidth
         rightSideRange = startRightSide...screen.height
     }
-    func objectRequestResults(_ results: [Any]) {
+    func objectsReturned(_ results: [Any]) {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-        detectionOverlay.sublayers = nil // remove all the old recognized objects
-        for observation in results where observation is VNRecognizedObjectObservation {
-            guard let objectObservation = observation as? VNRecognizedObjectObservation else {
+        overlay.sublayers = nil // resetting the view, by removing all detected object from thhe sublayer
+        for obj in results where obj is VNRecognizedObjectObservation {
+            guard let objectObservation = obj as? VNRecognizedObjectObservation else {
                 continue
             }
-            // Select only the object with the highest confidence.
-            topLabelObservation = objectObservation.labels[0]
+            // Only the object with the hisgest score will be selected
+            highestScoreObj = objectObservation.labels[0]
             
-            let objectBounds = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(bufferSize.width), Int(bufferSize.height))
+            let boxShape = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(buffeCapacity.width), Int(buffeCapacity.height))
+            let boundingBoxLayer = self.boundingBox(boxShape)
+            let contentLayer = self.createTextSubLayerInBounds(boxShape,objName: highestScoreObj.identifier,objSocre: highestScoreObj.confidence)
+            boundingBoxLayer.addSublayer(contentLayer)
+            overlay.addSublayer(boundingBoxLayer)
             
-            let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds)
             
-            let textLayer = self.createTextSubLayerInBounds(objectBounds,
-                                                            identifier: topLabelObservation.identifier,
-                                                            confidence: topLabelObservation.confidence)
-            shapeLayer.addSublayer(textLayer)
-            detectionOverlay.addSublayer(shapeLayer)
+            
+            
+            //passing the detected object to MViewController
+            //MainView
+            //object is a global variable defined in MViewCtroller
             object = getObject()
             print(object)
                
         }
-        self.updateLayerGeometry()
+        self.layerConfigurationUpdate()
         CATransaction.commit()
     }
     
     override func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+        guard let bufferPxl = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
         
-        let exifOrientation = exifOrientationFromDeviceOrientation()
+        let orientation = deviceOrientation()
         
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: exifOrientation, options: [:])
+        let ImgRequestManger = VNImageRequestHandler(cvPixelBuffer: bufferPxl, orientation: orientation, options: [:])
         do {
-            try imageRequestHandler.perform(self.requests)
+            try ImgRequestManger.perform(self.requests)
         } catch {
             print(error)
         }
@@ -154,83 +160,87 @@ class ObjectDetectionViewController: DetectionController {
     override func setupAVCapture() {
         super.setupAVCapture()
         
-        // setup Vision parts
+        // setting Vision
 
-        layersSetup()
-        updateLayerGeometry()
-        modelSetup()
+        layerConfiguration()
+        layerConfigurationUpdate()
+        getModel()
 
-        // start the capture
+        // starting capture session
         startCaptureSession()
     }
     
-    func layersSetup() {
-        detectionOverlay = CALayer() // container layer that has all the renderings of the observations
-        detectionOverlay.name = "DetectionOverlay"
-        detectionOverlay.bounds = CGRect(x: 0.0,
-                                         y: 0.0,
-                                         width: bufferSize.width,
-                                         height: bufferSize.height)
-        detectionOverlay.position = CGPoint(x: rootLayer.bounds.midX, y: rootLayer.bounds.midY)
-        rootLayer.addSublayer(detectionOverlay)
+    //set object overlay
+    func layerConfiguration() {
+        overlay = CALayer() // container layer that has all the renderings of the observations
+        overlay.bounds = CGRect(x: 0.0,y: 0.0,width: buffeCapacity.width, height: buffeCapacity.height)
+        overlay.position = CGPoint(x: mainLayer.bounds.midX, y: mainLayer.bounds.midY)
+        mainLayer.addSublayer(overlay)
     }
     
-    func updateLayerGeometry() {
-        let bounds = rootLayer.bounds
+    //constantly update object overlay
+    func layerConfigurationUpdate() {
+        let boundingBox = mainLayer.bounds
         var scale: CGFloat
         
-        let xScale: CGFloat = bounds.size.width / bufferSize.height
-        let yScale: CGFloat = bounds.size.height / bufferSize.width
+        let xAxis: CGFloat = boundingBox.size.width / buffeCapacity.height
+        let yAxis: CGFloat = boundingBox.size.height / buffeCapacity.width
         
-        scale = fmax(xScale, yScale)
+        scale = fmax(xAxis, yAxis)
         if scale.isInfinite {
             scale = 1.0
         }
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
-        // rotate the layer into screen orientation and scale and mirror
-       detectionOverlay.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: scale, y: -scale))
+        // depending on scrren orientation adjust layer (scale, mirror)
+        overlay.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: scale, y: -scale))
         // center the layer
-        detectionOverlay.position = CGPoint (x: bounds.midX, y: bounds.midY)
+        overlay.position = CGPoint (x: boundingBox.midX, y: boundingBox.midY)
         
         CATransaction.commit()
         
     }
     
-    func createTextSubLayerInBounds(_ bounds: CGRect, identifier: String, confidence: VNConfidence) -> CATextLayer {
-        let textLayer = CATextLayer()
-        textLayer.name = "Object "
-        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nScore :  %.2f", confidence))
-        let largeFont = UIFont(name: "Helvetica", size: 10.0)!
-        formattedString.addAttributes([NSAttributedString.Key.font: largeFont], range: NSRange(location: 0, length: identifier.count))
-        textLayer.string = formattedString
-        textLayer.bounds = CGRect(x: 0, y: 0, width: bounds.size.height - 10, height: bounds.size.width - 10)
-        textLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
-        textLayer.shadowOpacity = 0.7
-        textLayer.shadowOffset = CGSize(width: 2, height: 2)
-        textLayer.foregroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.0, 0.0, 1.0])
-        textLayer.contentsScale = 2.0 // retina rendering
-        // rotate the layer into screen orientation and scale and mirror
-        objPosition = self.getObjLocatio(objectY: textLayer.position.x)
-        textLayer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: 1.0, y: -1.0))
-        return textLayer
+    //defining the content of the bounding box
+    func createTextSubLayerInBounds(_ objBox: CGRect, objName: String, objSocre: VNConfidence) -> CATextLayer {
+        let contentLayer = CATextLayer()
+        let label_score = NSMutableAttributedString(string: String(format: "\(objName)\nScore :  %.2f", objSocre))
+        let font = UIFont(name: "Helvetica", size: 10.0)!
+        label_score.addAttributes([NSAttributedString.Key.font: font], range: NSRange(location: 0, length: objName.count))
+        contentLayer.string = label_score
+        contentLayer.bounds = CGRect(x: 0, y: 0, width: objBox.size.height - 10, height: objBox.size.width - 10)
+        contentLayer.shadowOffset = CGSize(width: 2, height: 2)
+        contentLayer.foregroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.0, 0.0, 1.0])
+        contentLayer.position = CGPoint(x: objBox.midX, y: objBox.midY)
+        contentLayer.contentsScale = 2.0
+        contentLayer.shadowOpacity = 0.4
+
+        
+        
+        //passing the location of the object to MViewController
+        //MainView
+        //objPosition is a global variable defined in MViewCtroller
+        objPosition = self.getObjectLocation(objectY: contentLayer.position.x)
+        contentLayer.setAffineTransform(CGAffineTransform(rotationAngle: CGFloat(.pi / 2.0)).scaledBy(x: 1.0, y: -1.0))
+        return contentLayer
     }
     
-    func createRoundedRectLayerWithBounds(_ bounds: CGRect) -> CALayer {
-        let shapeLayer = CALayer()
-        shapeLayer.bounds = bounds
-        shapeLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
-        shapeLayer.name = "Found Object"
-        shapeLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [1.0, 1.0, 0.2, 0.4])
-        shapeLayer.cornerRadius = 7
-        return shapeLayer
+    //Setting the bounding box shape and color
+    func boundingBox(_ objBox: CGRect) -> CALayer {
+        let boxLayer = CALayer()
+        boxLayer.bounds = objBox
+        boxLayer.position = CGPoint(x: objBox.midX, y: objBox.midY)
+        boxLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [2.0, 1.0, 0.2, 0.3])
+        boxLayer.cornerRadius = 0
+        return boxLayer
     }
-
+    
+    //Algotrithm { Avoid repeating the detect object to the user continuosly }
     func getObject() -> String{
-               if topLabelObservation.confidence > 0.60 {
+               if highestScoreObj.confidence > 0.60 {
                
-               object = topLabelObservation.identifier as String
+               object = highestScoreObj.identifier as String
                 if listObject[0] == "nil"{
                     listObject[0] = object
                     return "nil"
@@ -259,7 +269,8 @@ class ObjectDetectionViewController: DetectionController {
             listObject[1] = "nil"
             return object
     }
-    
+   
+    //Only for testing
     func getObjectTest(objects:[[String:Int]]) -> String{
           let newObj = objects[index]
           index += 1
@@ -296,7 +307,9 @@ class ObjectDetectionViewController: DetectionController {
         return result
     }
     
-    func getObjLocatio(objectY:CGFloat) -> String{
+    //passing the detected object location
+    //in returning its position
+    func getObjectLocation(objectY:CGFloat) -> String{
       //  self.initView() //uncomment for testing
         var position = "nil"
         
@@ -315,6 +328,7 @@ class ObjectDetectionViewController: DetectionController {
         return position
     }
     
+    //function used to draw line in overlay
     func drawLine(position: CGFloat)->UIView{
         let lineView = UIView(frame: CGRect(x: 0, y: position, width: screen.width, height:2.0))
         lineView.layer.borderWidth = 1.0
@@ -324,3 +338,14 @@ class ObjectDetectionViewController: DetectionController {
 }
 
 
+
+
+//Reference
+//******************************************************************************************************************************************************/
+/*    Title:Recognizing Objects in Live Capture
+ *    Author: Copyright © 2020 Apple Inc. All rights reserved.
+ *    Date: 03/24/2020
+ *    Code version: 1.0
+ *    Availability: https://developer.apple.com/documentation/vision/recognizing_objects_in_live_capture
+ *
+*******************************************************************************************************************************************************/

@@ -28,7 +28,7 @@ class Prototype2Tests: XCTestCase {
         //midle 270.01...540.01
         //right 540.02...812
         let y = 500.6328125
-        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
         XCTAssertEqual(getLocation, "in front of you", "Score computed from guess is wrong")
     }
     func testObjectLocation2(){
@@ -36,7 +36,7 @@ class Prototype2Tests: XCTestCase {
         //midle 270.01...540.01
         //right 540.02...812
         let y = 470.6328125
-        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
         XCTAssertEqual(getLocation, "in front of you", "Wrong location")
     }
     func testObjectLocation3(){
@@ -44,7 +44,7 @@ class Prototype2Tests: XCTestCase {
            //midle 270.01...540.01
            //right 540.02...812
            let y = 274.6328125
-           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
            XCTAssertEqual(getLocation, "in front of you", "Wrong location")
        }
     func testObjectLocation4(){
@@ -52,7 +52,7 @@ class Prototype2Tests: XCTestCase {
         //midle 270.01...540.01
         //right 540.02...812
         let y = 570.6328125
-        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
         XCTAssertEqual(getLocation, "on your right side", "Wrong location")
     }
     func testObjectLocation5(){
@@ -60,7 +60,7 @@ class Prototype2Tests: XCTestCase {
            //midle 270.01...540.01
            //right 540.02...812
            let y = 674.6328125
-           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
            XCTAssertEqual(getLocation, "on your right side", "Wrong location")
        }
     func testObjectLocation6(){
@@ -68,7 +68,7 @@ class Prototype2Tests: XCTestCase {
         //midle 270.01...540.01
         //right 540.02...812
         let y = 170.6328125
-        let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+        let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
         XCTAssertEqual(getLocation, "on your left side", "Wrong location")
     }
     func testObjectLocation7(){
@@ -76,7 +76,7 @@ class Prototype2Tests: XCTestCase {
            //midle 270.01...540.01
            //right 540.02...812
            let y = 94.6328125
-           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
            XCTAssertEqual(getLocation, "on your left side", "Wrong location")
        }
     func testObjectLocation8(){
@@ -84,7 +84,7 @@ class Prototype2Tests: XCTestCase {
            //midle 270.01...540.01
            //right 540.02...812
            let y = -94.6328125
-           let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+           let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
            XCTAssertEqual(getLocation, "nil", "Wrong location")
        }
     func testObjectLocation9(){
@@ -92,7 +92,7 @@ class Prototype2Tests: XCTestCase {
               //midle 270.01...540.01
               //right 540.02...812
               let y = 43265.6328125
-              let getLocation = obj.getObjLocatio(objectY: CGFloat(y))
+              let getLocation = obj.getObjectLocation(objectY: CGFloat(y))
               XCTAssertEqual(getLocation, "nil", "Wrong location")
           }
     func testGetObj(){

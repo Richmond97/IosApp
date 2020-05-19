@@ -14,9 +14,9 @@
             filePath = "Prototype2/ObjectDetectionViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "modelSetup()"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "getModel()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -32,7 +32,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
-            landmarkName = "modelSetup()"
+            landmarkName = "getModel()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

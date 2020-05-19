@@ -12,6 +12,7 @@
 		56EF1DBF1E73AA513A1C18D7 /* libPods-Prototype2UITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8482B828BADD70C88A3856 /* libPods-Prototype2UITests.a */; };
 		89132DA0245C5B1900796DCE /* MViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89132D9E245C5B1900796DCE /* MViewController.swift */; };
 		89132DA1245C5B1900796DCE /* MViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89132D9F245C5B1900796DCE /* MViewController.xib */; };
+		891B17B12474447100A5DC0A /* TinyYOLOv3_VOC.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 891B17B02474447100A5DC0A /* TinyYOLOv3_VOC.mlmodel */; };
 		891CFC0224507CFD0060A335 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 891CFC0124507CFD0060A335 /* MapKit.framework */; };
 		8929AAEC2457130B005A22E6 /* SpeechSynthetizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */; };
 		89384298245B927200A8FA25 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973014B244D0F2D009762A3 /* CoreData.framework */; };
@@ -29,7 +30,6 @@
 		89730144244D0E83009762A3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89730143244D0E83009762A3 /* SystemConfiguration.framework */; };
 		8973014F244D11B4009762A3 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 8973014E244D11B4009762A3 /* bridge.m */; };
 		89730150244D3EA1009762A3 /* libc++.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8973013F244D0E09009762A3 /* libc++.1.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
-		89BA091F23E44FC70018B26C /* YOLOv3Tiny.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */; };
 		89BA092123E456160018B26C /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA092023E456160018B26C /* ObjectDetectionViewController.swift */; };
 		89D694A723E0F5EF003EC695 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694A623E0F5EF003EC695 /* AppDelegate.swift */; };
 		89D694A923E0F5EF003EC695 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D694A823E0F5EF003EC695 /* SceneDelegate.swift */; };
@@ -63,6 +63,7 @@
 		78AC34D484D6670BC286C555 /* Pods-Prototype2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Prototype2.release.xcconfig"; path = "Target Support Files/Pods-Prototype2/Pods-Prototype2.release.xcconfig"; sourceTree = "<group>"; };
 		89132D9E245C5B1900796DCE /* MViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MViewController.swift; sourceTree = "<group>"; };
 		89132D9F245C5B1900796DCE /* MViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MViewController.xib; sourceTree = "<group>"; };
+		891B17B02474447100A5DC0A /* TinyYOLOv3_VOC.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = TinyYOLOv3_VOC.mlmodel; path = ../../../../Downloads/TinyYOLOv3_VOC.mlmodel; sourceTree = "<group>"; };
 		891CFC0124507CFD0060A335 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8929AAEB24571309005A22E6 /* SpeechSynthetizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthetizer.swift; sourceTree = "<group>"; };
 		893C134F23F40E20000C87B3 /* TextToSpeech */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TextToSpeech; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		8973014B244D0F2D009762A3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		8973014D244D11B3009762A3 /* Prototype2-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototype2-Bridging-Header.h"; sourceTree = "<group>"; };
 		8973014E244D11B4009762A3 /* bridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
-		89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YOLOv3Tiny.mlmodel; sourceTree = "<group>"; };
 		89BA092023E456160018B26C /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		89D694A323E0F5EF003EC695 /* Prototype2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototype2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89D694A623E0F5EF003EC695 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 				89BA092023E456160018B26C /* ObjectDetectionViewController.swift */,
 				89D694AF23E0F5F4003EC695 /* Assets.xcassets */,
 				89D694B123E0F5F4003EC695 /* LaunchScreen.storyboard */,
-				89BA091E23E44FC70018B26C /* YOLOv3Tiny.mlmodel */,
+				891B17B02474447100A5DC0A /* TinyYOLOv3_VOC.mlmodel */,
 				893C134F23F40E20000C87B3 /* TextToSpeech */,
 				89D694B423E0F5F4003EC695 /* Info.plist */,
 				89D694BC23E0F5F4003EC695 /* Prototype2Tests */,
@@ -480,7 +480,7 @@
 				89F0B11C242C1F8E006C8430 /* DetectionController.swift in Sources */,
 				89D694A923E0F5EF003EC695 /* SceneDelegate.swift in Sources */,
 				89BA092123E456160018B26C /* ObjectDetectionViewController.swift in Sources */,
-				89BA091F23E44FC70018B26C /* YOLOv3Tiny.mlmodel in Sources */,
+				891B17B12474447100A5DC0A /* TinyYOLOv3_VOC.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

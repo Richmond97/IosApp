@@ -11,7 +11,8 @@ import CoreLocation
 import AVFoundation
 import MapKit
 
-//the detect object are assigned to this vars, from the object detection class
+//the detected object are assigned to this vars,
+//from the objectDetection class
 var object: String = "nil"
 var objPosition: String = "nil"
 
@@ -20,7 +21,6 @@ class MViewController: UIViewController {
          @IBOutlet weak var lblSteps: UILabel!
          @IBOutlet weak var tapGesture: UIButton!
          @IBOutlet weak var lblTitle: UILabel!
-         @IBOutlet weak var searchBar: UISearchBar!
          @IBOutlet weak var lblDirection: UILabel!
          @IBOutlet weak var mapView: MKMapView!
     
@@ -38,12 +38,15 @@ class MViewController: UIViewController {
          var instructions: String = "nil"
          var tasksSequence: Array = [1,0,0,0,0,0]
          var expectedTravelTime: TimeInterval = 0
-
+    
+         //location info
          var desiredlocation = "nil"
          var venueName = "unknown"
-         var running = false
+         //bool
+         var running = true
          var startSimulation = false
          var giveSeconfIns = false
+         //count needed outside of methods
          var count = 0
          var i = 1
          var tapCount = 0
@@ -87,19 +90,24 @@ class MViewController: UIViewController {
                 }
             }
         }
-    func getDirections(to destionation: MKMapItem,withCompletionHandler completionHandler: @escaping(( _ success: Bool) -> Void)){
+    // completion handler returns true only if the
+    //duration of the jounery is pf walkable distance
+    func getDirections(to userDestination: MKMapItem,withCompletionHandler completionHandler: @escaping(( _ success: Bool) -> Void)){
         let sourceMark = MKPlacemark(coordinate: currentCoordinate)
-        let sourceDirection = MKMapItem(placemark: sourceMark)
-        let directionRequest = MKDirections.Request()
-        directionRequest.source = sourceDirection
-        directionRequest.destination = destionation
-        directionRequest.transportType = .walking
-        let direction = MKDirections(request: directionRequest)
-        direction.calculate { (response, error) in
+        let source = MKMapItem(placemark: sourceMark)
+        let directionsReq = MKDirections.Request()
+        directionsReq.source = source
+        directionsReq.destination = userDestination
+        directionsReq.transportType = .walking
+        let directions = MKDirections(request: directionsReq)
+        directions.calculate { (response, error) in
             guard let response = response else { return }
             self.mainPath = response.routes.first
             self.expectedTravelTime =  self.mainPath.expectedTravelTime
             self.expectedTravelTime = self.expectedTravelTime / 60
+            
+            
+            //checking the duration of the jouney
             if self.expectedTravelTime > 35{
                 completionHandler(false)
             }
@@ -120,8 +128,10 @@ class MViewController: UIViewController {
                 self.turnRegion = CLCircularRegion(center: nextStep.polyline.coordinate,
                                             radius: 20,
                                             identifier: "\(i)")
+                //monitor regions
                 self.locationManger.startMonitoring(for: self.turnRegion)
                 
+                //display region on map
                 self.mradius = MKCircle(center: self.turnRegion.center, radius: self.turnRegion.radius)
                 self.mapView.addOverlay(self.mradius)
 
@@ -132,18 +142,19 @@ class MViewController: UIViewController {
         }
     }
     func clearMap(){
-        for overlay in mapView.overlays {
-              self.mapView.removeOverlay(overlay)
+        for layers in mapView.overlays {
+              self.mapView.removeOverlay(layers)
          }
     }
+    //search location and use the obtainesd coordinates in getDirections()
     func searchLocation(location:String,withCompletionHandler completionHandler: @escaping(( _ finshed: Bool) -> Void)){
-            let searchRequest = MKLocalSearch.Request()
-                        searchRequest.naturalLanguageQuery = location
+            let searchReq = MKLocalSearch.Request()
+                        searchReq.naturalLanguageQuery = location
                         let region = MKCoordinateRegion(center:currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.1
                             , longitudeDelta: 0.1))
-                        searchRequest.region = region
-                        let nearestSearch = MKLocalSearch(request: searchRequest)
-                        nearestSearch.start { (response, _) in
+                        searchReq.region = region
+                        let closestSearch = MKLocalSearch(request: searchReq)
+                        closestSearch.start { (response, _) in
                             guard let response = response else {return}
                             print(response.mapItems.first!)
                             //grab first item
@@ -161,6 +172,7 @@ class MViewController: UIViewController {
             }
         }
     }
+    //listen to user locrion
     func getLoactionTask(withCompletionHandler completionHandler: @escaping((_ location: String, _ finshed: Bool) -> Void)){
             self.userIsSpeaking { (location, finished) in
                 if finished{
@@ -173,11 +185,14 @@ class MViewController: UIViewController {
            
         }
     }
+    //listen to user answer
     func confirmAction(location: String){
             
             print("confirming location...")
             vc.startSpeaking(messaage: "You would like to go to \(location), is that correct?",type: "indication")
         }
+    
+    //managing user response YES,NO.UNKNOWN
     func responseConfirmation(location: String,type: String, withCompletionHandler completionHandler: @escaping((_ response: String, _ finshed: Bool) -> Void)){
         self.userIsSpeaking { (answer, finished) in
             if finished {
@@ -210,6 +225,8 @@ class MViewController: UIViewController {
             }
         }
     }
+    
+    //detect objects during navigation
     func delagateNavigation(){
         DispatchQueue.main.async {
                self.delay(5){
@@ -222,6 +239,8 @@ class MViewController: UIViewController {
             }
     }
 }
+    
+    //return user current location
     func findCurrentLocation(completionHandler: @escaping (CLPlacemark?,_ success:Bool)
                          -> Void ) {
              // Use the last reported location.
@@ -242,12 +261,13 @@ class MViewController: UIViewController {
                  })
              }
              else {
-                 // No location was available.
+                 // No location was found.
                  completionHandler(nil, false)
              }
          }
+    
+    //Test Navigation
     @IBAction func simulateNavigation(_ sender: Any) {
-        lblDirection.text = "IN NAVIGATION"
         if startSimulation {
             lblDirection.text = "IN NAVIGATION..."
              print(i)
@@ -279,7 +299,7 @@ class MViewController: UIViewController {
             }
     }
     @IBAction func tapTwice(_ sender: Any) {
-                  print("works")
+            //print("works")
             findCurrentLocation { (location,success) in
                 if success == true{
                     self.vc.startSpeaking(messaage: " you are currently in, \(location?.name ?? "notFound"),and the postal code is, \(location?.postalCode ?? "notFound")",type: "indication")
@@ -331,6 +351,7 @@ class MViewController: UIViewController {
                                     self.searchLocation(location: self.desiredlocation)
                                     { (succcess) in
                                     if !succcess{
+                                        //if false is returned from searcLocation it means that the duration of the journey is too long (>35min)
                                         print("Travel time: \(self.expectedTravelTime) minutes ")
                                             self.vc.startSpeaking(messaage: "Sorry \(Int(self.expectedTravelTime)) minutes, is not a walkable distance, please choose a closer destination",type: "indication")
                                             self.desiredlocation = ""
@@ -373,12 +394,14 @@ class MViewController: UIViewController {
         }
         
     }
+            //When user taps the screen duinng naviagtion
         else if tasksSequence[4] == 1{
             self.vc.startSpeaking(messaage: " Would you like to start a new journey?", type: "indication")
             self.tasksSequence[4] = 0
             self.tasksSequence[5] = 1
             return
         }
+            //resoonse to exit navigation
         else if tasksSequence[5] == 1{
             if tapCount < 2{
                 self.responseConfirmation(location: "exit navigattion", type:"newJourney") { (answer, finished) in
@@ -413,7 +436,7 @@ class MViewController: UIViewController {
         }
     }
 }
-    //get User current location
+    //get user coordinates
     extension MViewController: CLLocationManagerDelegate{
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             guard let currLocation = locations.first else {return}
@@ -428,12 +451,12 @@ class MViewController: UIViewController {
             }
         }
         func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-           
-      /*      if region is CLCircularRegion{
+           //When user enters in region
+           if region is CLCircularRegion{
+                lblDirection.text = "IN NAVIGATION..."
                 self.count += 1
                 if !running{
                 lblDirection.text = "in region \(count)"
-                   // lblDirection.text = "in region \(count)"
                     lblSteps.text = " \(self.eachStep[self.count].instructions), then, proceed  straight for \(self.eachStep[self.count].distance) meters"
                           if count < self.eachStep.count{
                            DispatchQueue.main.async(){ self.vc.startSpeaking(messaage: " \(self.eachStep[self.count].instructions), then, proceed  straight for \(self.eachStep[self.count].distance) meters",type: "indication")
@@ -450,7 +473,6 @@ class MViewController: UIViewController {
                      
             }
         }
-*/
     }
         //directions to the user when he exits a region
         func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
@@ -472,6 +494,8 @@ class MViewController: UIViewController {
             }
         }
     }
+
+    //add overlay
     extension MViewController: MKMapViewDelegate{
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             //draw route on map
@@ -493,4 +517,15 @@ class MViewController: UIViewController {
         }
     }
 
-   
+
+
+//Reference
+//******************************************************************************************************************************************************/
+/*    Title:Converting Between Coordinates and User-Friendly Place Names
+ *    Author: Copyright © 2020 Apple Inc. All rights reserved.
+ *    Date: 04/21/2020
+ *    Code version: 1.0
+ *    Availability: https://developer.apple.com/documentation/corelocation/converting_between_coordinates_and_user-friendly_place_names
+ *
+*******************************************************************************************************************************************************/
+

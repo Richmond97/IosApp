@@ -64,6 +64,7 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
         }
         return authorize
     }
+    //speech to text
     public func startListening(withCompletionHandler completionHandler: @escaping((_ instructions: String, _ finshed: Bool) -> Void)){
         if speechReqTask != nil{
                 speechReqTask?.cancel()
@@ -112,7 +113,7 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
              }
     completionHandler("",false)
         }
-    
+    //text to speech
     public func startSpeaking(messaage: String, type: String ){
       DispatchQueue.main.async {
              
@@ -135,9 +136,8 @@ class SpeechSynthetizer: UIViewController, SFSpeechRecognizerDelegate{
         }
     }
 }
-
 extension SpeechSynthetizer: AVSpeechSynthesizerDelegate{
-    //avoid speech synthetizer to have 2 utterance in one session
+    //avoid speech synthetizer having utterance in one session
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer,
                            didFinish utterance: AVSpeechUtterance){
             self.canSpeak = true
