@@ -1,0 +1,2 @@
+# Guide me
+Implementation of Machine learning, Deep Learning, Object detection algorithm, Tenser-flow, ML-kit, natural language processing. The end goal of this project is to develop a mobile application, specifically for the blind and the visually impaired,The mobile application will be use as an assistance to the blind, by helping the user in daily movements(move from location A to B) to do so it will leverage the YOLO(deep learning Object detection algorithm) and natural language processing.
